@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>分值测算</title>
+</head>
+<body>
+	<br>
+	<b>分值/费用测算</b>
+	<br>
+	<br>
+	<table border="1">
+	    <tr>
+	        <th>登记号</th>
+	        <th>住院号</th>
+	        <th>科室</th>
+	        <th>姓名</th>
+	        <th>出入院日期</th>
+	        <th>编码</th>
+	        <th>最终分值</th>
+	        <th>超支</th>
+	        <th>总费用</th>
+	        <th>费用占比</th>
+	        <th>2019年<br>同级医院次均费用</th>
+	    </tr>
+	    <tr>
+	        <td>Zy5454</td>
+	        <td>120544</td>
+	        <td>精神科</td>
+	        <td>陈三</td>
+	        <td>
+				2020年12月4日入院<br>
+				2020年12月5日出院<br>
+				-共1天-
+			</td>
+	        <td>
+				<form>
+					病种编码: <input type="text" name="firstname" value="请输入ICD-10" onFocus="this.value=''"/>
+					<br>
+					手术编码: <input type="text" name="lastname" value="请输入ICD-9-CM-3" onFocus="this.value=''"/>
+				</form>
+				<input type="submit" />
+				病种标准分值是：191
+			</td>
+	        <td>191</td>
+	        <td>-184</td>
+	        <td>3300.10</td>
+	        <td>50%</td>
+	        <td>3300</td>
+	    </tr>
+	</table>
+	<br>
+</body>
+</html>

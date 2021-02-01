@@ -11,6 +11,9 @@
                 border:0px solid rgb(57, 14, 214);
                 padding:10px;
             }
+            font{
+                color: rgb(255, 255, 255);
+            }
             table{text-align:left; font-size:15px;margin:auto;width:910px;}
             th{text-align: left;}
             select{font-size:15px; width:150px;height:24px;margin-top: 4px;}
@@ -116,9 +119,11 @@
             <form id="peopleInfo" name="peopleInfo" method="POST">
                 <table border="5" cellspacing="0" cellpadding="10">
                     <tr>
-                        <th style="border-bottom:1px;">
+                        <th style="border-bottom:0px;">
                             <h3>基本信息(<font style="color: rgb(255, 0, 0);">必填</font>)</h3>
-                            &emsp;&emsp;姓名：<input id="myName" type="text" maxlength="16" />
+                            门诊卡号：<input id="myHosId" type="text" maxlength="12"/>
+                            <br/>
+                            &emsp;<font>一</font>姓名：<input id="myName" type="text" maxlength="16" />
                             证件类型：<select name="idType" id="idType" style="width: 300px;" >
                                 <option value="居民身份证">居民身份证</option>
                                 <option value="护照">护照</option>
@@ -132,8 +137,56 @@
                             证件号码：<input id="idNum" type="text" maxlength="18" style="width: 176px;" onblur="setIdData()"/>
                             性别：<label for="male">男</label><input type="radio" name="sex" id="male" class="selectStyle"/>
                             <label for="female">女</label><input type="radio" name="sex" id="female" class="selectStyle"/>
+                        </th>
+                        <th style="border-bottom:0px;">
+                            <h3>基本信息(选填)</h3>
+                            &emsp;&emsp;年龄：<input id="age" type="text" maxlength="3" style="width:50px;"/> 岁(整数)
                             <br/>
-                            &emsp;居住地：<select name="country" id="country">
+                            &emsp;&emsp;省区：<select name="sheng" id="sheng">
+                                <option value=""></option>
+                                <option value="广东省">广东省</option>
+                                <option value="北京市">北京市</option>
+                                <option value="天津市">天津市</option>
+                                <option value="河北省">河北省</option>
+                                <option value="山西省">山西省</option>
+                                <option value="内蒙古自治区">内蒙古自治区</option>
+                                <option value="辽宁省">辽宁省</option>
+                                <option value="吉林省">吉林省</option>
+                                <option value="黑龙江省">黑龙江省</option>
+                                <option value="上海市">上海市</option>
+                                <option value="江苏省">江苏省</option>
+                                <option value="浙江省">浙江省</option>
+                                <option value="安徽省">安徽省</option>
+                                <option value="福建省">福建省</option>
+                                <option value="江西省">江西省</option>
+                                <option value="山东省">山东省</option>
+                                <option value="河南省">河南省</option>
+                                <option value="湖北省">湖北省</option>
+                                <option value="湖南省">湖南省</option>
+                                <option value="广西壮族自治区">广西壮族自治区</option>
+                                <option value="海南省">海南省</option>
+                                <option value="重庆市">重庆市</option>
+                                <option value="四川省">四川省</option>
+                                <option value="贵州省">贵州省</option>
+                                <option value="云南省">云南省</option>
+                                <option value="西藏自治区">西藏自治区</option>
+                                <option value="陕西省">陕西省</option>
+                                <option value="甘肃省">甘肃省</option>
+                                <option value="青海省">青海省</option>
+                                <option value="宁夏回族自治区">宁夏回族自治区</option>
+                                <option value="新疆维吾尔自治区">新疆维吾尔自治区</option>
+                                <option value="新疆兵团">新疆兵团</option>
+                                <option value="台湾省">台湾省</option>
+                                <option value="香港特别行政区">香港特别行政区</option>
+                                <option value="澳门特别行政区">澳门特别行政区</option>
+                            </select>
+                            <br/>
+                            &emsp;&emsp;城市：<input id="city" type="text" maxlength="16"/>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th style="border-top:0px;border-bottom:0px;">
+                            <font>一</font>居住地：<select name="country" id="country">
                                 <option value="中国">中国</option>
                                 <option value="中国澳门">中国澳门</option>
                                 <option value="中国台湾">中国台湾</option>
@@ -391,55 +444,7 @@
                                 <option value="自费">自费</option>
                                 <option value="免费">免费</option>                    
                             </select>
-                        </th>
-                        <th style="border-bottom:1px;">
-                            <h3>基本信息(选填)</h3>
-                            &emsp;&emsp;年龄：<input id="age" type="text" maxlength="3" style="width:50px;"/> 岁(整数)
                             <br/>
-                            &emsp;&emsp;省区：<select name="sheng" id="sheng">
-                                <option value=""></option>
-                                <option value="广东省">广东省</option>
-                                <option value="北京市">北京市</option>
-                                <option value="天津市">天津市</option>
-                                <option value="河北省">河北省</option>
-                                <option value="山西省">山西省</option>
-                                <option value="内蒙古自治区">内蒙古自治区</option>
-                                <option value="辽宁省">辽宁省</option>
-                                <option value="吉林省">吉林省</option>
-                                <option value="黑龙江省">黑龙江省</option>
-                                <option value="上海市">上海市</option>
-                                <option value="江苏省">江苏省</option>
-                                <option value="浙江省">浙江省</option>
-                                <option value="安徽省">安徽省</option>
-                                <option value="福建省">福建省</option>
-                                <option value="江西省">江西省</option>
-                                <option value="山东省">山东省</option>
-                                <option value="河南省">河南省</option>
-                                <option value="湖北省">湖北省</option>
-                                <option value="湖南省">湖南省</option>
-                                <option value="广西壮族自治区">广西壮族自治区</option>
-                                <option value="海南省">海南省</option>
-                                <option value="重庆市">重庆市</option>
-                                <option value="四川省">四川省</option>
-                                <option value="贵州省">贵州省</option>
-                                <option value="云南省">云南省</option>
-                                <option value="西藏自治区">西藏自治区</option>
-                                <option value="陕西省">陕西省</option>
-                                <option value="甘肃省">甘肃省</option>
-                                <option value="青海省">青海省</option>
-                                <option value="宁夏回族自治区">宁夏回族自治区</option>
-                                <option value="新疆维吾尔自治区">新疆维吾尔自治区</option>
-                                <option value="新疆兵团">新疆兵团</option>
-                                <option value="台湾省">台湾省</option>
-                                <option value="香港特别行政区">香港特别行政区</option>
-                                <option value="澳门特别行政区">澳门特别行政区</option>
-                            </select>
-                            <br/>
-                            &emsp;&emsp;城市：<input id="city" type="text" maxlength="16"/>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th style="border-top:0px;border-bottom:0px;">
                             人员来源：<select name="peopleSource" id="peopleSource" >
                                 <option value="1">集中留观</option>
                                 <option value="2">密切接触者</option>

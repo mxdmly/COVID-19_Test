@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>端州医院医保办</title>
+<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<style>
+    img{
+        border-style:none;
+    }
+	nav{
+		display:flex;
+		align-items:center;
+	}
+	iframe{
+		margin: auto;
+		text-align: center;
+		width: 100%;
+		height: 650px;
+		border:medium none;
+	}
+	a:link{color: #0000CC !important}/*设置全局未点击链接的颜色*/
+	a:visited {color: #0000CC !important} /*设置全局被点击后的链接颜色*/
+	/*a:hover {color: #00BBFF !important} /*设置全局鼠标悬停在链接上未点击时的颜色*/
+	a:active {color: #00BBFF !important} /*设置全局鼠标在点击链接瞬间发生的动作*/
+	ul,li{
+		float: left;
+		list-style: none;
+	}
+	li.myLi{
+		width: 200px;
+	}
+</style>
+<script src="/htdocs/js/jquery.js"></script>
+<script>
+	$("li.myLi").mouseover(function () {
+		$(this).children("ul").show();
+	})
+	$("li.myLi").mouseout(function () {
+		$(this).children("ul").hide();
+	})
+</script>
+<body>
+<nav height="70" >
+	<ul>
+		<a href="/index.html">
+			<img src="/img/logo.png" width="175" height="50" />
+		</a>
+	</ul>
+	<ul>
+		<li>
+			<a href="/index.html">主页</a>
+		</li>
+		<li class="myLi">
+			<div>
+				<a href="" target="myIframe">医生工作站</a>
+			</div>
+			<div>
+				<a href="/doc_COVID19_TestForm.html" target="myIframe">新冠病毒检测登记表</a>
+			</div>
+		</li>
+		<li>
+			<div>
+				<a href="" target="myIframe">护理部</a>
+			</div>
+			<div>
+				<a href="/lis_COVID19_TestCheck.html" target="myIframe">新冠病毒检测结果上报</a>
+			</div>
+		</li>
+		<li>
+			<div>
+				<a href="" target="myIframe">检验科</a>
+			</div>
+			<div>
+				<a href="/lis_COVID19_TestCheck.html" target="myIframe">新冠病毒检测结果呈批</a>
+			</div>
+		</li>
+		<li>
+			<div>
+				<a href="" target="myIframe">医保/财务/审计</a>
+			</div>
+			<div>
+				<a href="" target="myIframe">特殊门诊办卡记录</a>
+				<br/>
+				<a href="/ybb_points.html" target="myIframe">分值/费用测算</a>
+				<br/>
+				<a href="" target="myIframe">相关文件下载</a>
+			</div>
+		</li>
+		<li>
+			<div>
+				<a href="" target="myIframe">特殊情况</a>
+			</div>
+			<div>
+				<a href="https://syfw.gdwst.gov.cn/pdc/">死亡报告卡上报</a>
+			</div>
+		</li>
+	</ul>
+</nav>
+<hr>
+<iframe src="/index_body.html" id="myIframe" name="myIframe"></iframe>
+<div align="center" style="background-color:#4267ac;color:#FFF;font-size:12px;font-variant:small-caps;height:50px;padding-top:25px;">
+    <a href="/about.html">关于我们</a>&nbsp;<a href="/test/index.html">测试网页</a>&nbsp;<img src="/img/tel.png" width="12" height="12"/>2293025&nbsp;<img src="/img/tel.png" width="12" height="12"/>2293022 工作时间 周一至周五8:00-11:30或12:30-17:30
+    <br>
+    <span style="font-style:oblique;">版权所有 © 2021 肇庆市端州区人民院医保办 保留所有权利。</span>
+</div>
+</body>
+</html>
