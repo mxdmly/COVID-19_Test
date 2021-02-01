@@ -24,20 +24,20 @@
 	a:visited {color: #0000CC !important} /*设置全局被点击后的链接颜色*/
 	/*a:hover {color: #00BBFF !important} /*设置全局鼠标悬停在链接上未点击时的颜色*/
 	a:active {color: #00BBFF !important} /*设置全局鼠标在点击链接瞬间发生的动作*/
-	ul,li{
+	ul li{
 		float: left;
 		list-style: none;
 	}
-	li.myLi{
-		width: 200px;
+	.myNavItem{
+		display: block;
 	}
 </style>
-<script src="/htdocs/js/jquery.js"></script>
+<script src="js/jquery.js"></script>
 <script>
-	$("li.myLi").mouseover(function () {
+	$("myNavItem").mouseover(function () {
 		$(this).children("ul").show();
 	})
-	$("li.myLi").mouseout(function () {
+	$("myNavItem").mouseout(function () {
 		$(this).children("ul").hide();
 	})
 </script>
@@ -50,13 +50,13 @@
 	</ul>
 	<ul>
 		<li>
-			<a href="/index.html">主页</a>
+			<a href="/test.html">主页</a>
 		</li>
-		<li class="myLi">
+		<li>
 			<div>
 				<a href="" target="myIframe">医生工作站</a>
 			</div>
-			<div>
+			<div class="myNavItem">
 				<a href="/doc_COVID19_TestForm.html" target="myIframe">新冠病毒检测登记表</a>
 			</div>
 		</li>

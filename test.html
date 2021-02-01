@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html
+xmlns="http://www.w3.org/1999/xhtml">
+ 
+<head>
+ 
+<meta
+http-equiv="Content-Type"
+content="text/html; charset=gb2312" />
+ 
+<title>下拉菜单</title>
+ 
+<link
+rel="stylesheet"
+type="text/css"
+href="style.css" rel="external nofollow"
+/>
+ 
+<!--引用百度服务器的jQuery库-->
+ <style>
+     /*CSS全局设置*/
+ 
+*{
+ 
+ margin:0;
+ 
+ padding:0;
+ 
+}
+ 
+.nav{
+ 
+ background-color:#EEEEEE;
+ 
+ height:40px;
+ 
+ width:450px;
+ 
+ margin:0
+auto;
+ 
+}
+ 
+ul{
+ 
+ list-style:none;
+ 
+}
+ 
+ul li{
+ 
+ float:left;
+ 
+ line-height:40px;
+ 
+ text-align:center;
+ 
+}
+ 
+a{
+ 
+ text-decoration:none;
+ 
+ color:#000000;
+ 
+ display:block;
+ 
+ width:90px;
+ 
+ height:40px;
+ 
+}
+ 
+a:hover{
+ 
+ background-color:#666666;
+ 
+ color:#FFFFFF;
+ 
+}
+ 
+ul li ul li{
+ 
+ float:none;
+ 
+ background-color:#EEEEEE;
+ 
+}
+ 
+ul li ul{
+ 
+ display:none;
+ 
+}
+ 
+/*为了兼容IE7写的CSS样式，但是必须写在a:hover前面*/
+ 
+ul li ul li a:link,ul li ul li a:visited{
+ 
+ background-color:#EEEEEE;
+ 
+}
+ 
+ul li ul li a:hover{
+ 
+ background-color:#009933;
+ 
+}
+ </style>
+<script
+src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+ 
+<script
+type="text/javascript"
+src="script.js"></script>
+ <script>
+     $(function(){
+ 
+ $(".navmenu").mouseover(function(){
+
+  $(this).children("ul").show(); 
+
+ })
+
+   
+
+ $(".navmenu").mouseout(function(){
+
+  $(this).children("ul").hide();
+
+ })
+
+})
+ </script>
+</head>
+ 
+   
+ 
+<body>
+ 
+<div
+id="nav"
+class="nav">
+ 
+  <ul>
+ 
+    <li><a
+href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" >网站首页</a></li>
+ 
+   <li
+class="navmenu"><a
+href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" >课程大厅</a>
+ 
+    <ul>
+ 
+     <li><a
+href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" >JavaScript</a></li>
+ 
+     <li><a
+href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" >jQuery</a></li>
+ 
+     <li><a
+href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" >Ajax</a></li>
+ 
+    </ul>
+ 
+   </li>
+ 
+   <li
+class="navmenu"><a
+href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" >学习中心</a>
+ 
+    <ul>
+ 
+     <li><a
+href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" >视频学习</a></li>
+ 
+     <li><a
+href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" >案例学习</a></li>
+ 
+     <li><a
+href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" >交流平台</a></li>
+ 
+    </ul>
+ 
+   </li>
+ 
+   <li><a
+href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" >经典案例</a></li>
+ 
+   <li><a
+href="#" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" rel="external nofollow" >关于我们</a></li>
+ 
+  </ul>
+ 
+</div>
+ 
+</body>
+ 
+</html>
