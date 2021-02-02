@@ -10,48 +10,47 @@
     }
 	nav{
 		display:flex;
-		align-items:center;
-	}
-	.myIframe{
-		margin: auto;
-		text-align: center;
-		width: 990px;
-		height: 450px;
-		border:medium none;
 	}
 	a{
 		text-decoration: none;
 		text-align: center;
+		cursor: pointer;
 	}
 	a:link{color: #000000 !important}/*设置全局未点击链接的颜色*/
 	a:visited {color: #000000 !important} /*设置全局被点击后的链接颜色*/
-	/*a:hover {color: #00BBFF !important} /*设置全局鼠标悬停在链接上未点击时的颜色*/
-	a:active {color: #00BBFF !important} /*设置全局鼠标在点击链接瞬间发生的动作*/
+	a:hover {color: #0077ff !important} /*设置全局鼠标悬停在链接上未点击时的颜色*/
+	a:active {color: #73daff !important} /*设置全局鼠标在点击链接瞬间发生的动作*/
 	ul{
-		background-color: aliceblue;
+		background-color: rgb(255, 255, 255);
 		float: left;
 	}
 	ul li{
-		width: 130px;
-		height: 40px;
+		width: 140px;
+		height: 50px;
 		margin-left: 2px;
-		background-color: rgb(240, 240, 240);
+		background-color: rgb(102, 102, 102);
 		float: left;
 		list-style: none;
 	}
+	.myIframe{
+		margin: auto;
+		width: 990px;
+		height: 450px;
+		border:medium none;
+	}
 	.myNavItem{
-		padding: 10px;
+		padding: 10%;
 		text-align: center;
 		background-color: rgb(240, 240, 240);
 	}
 	.myNavList{
 		display: none;
-		background-color: rgb(150, 201, 235);
+		background-color: rgb(240, 240, 240)
 	}
 </style>
 <script src="js/jquery.js"></script>
 <script>
-	$(function () {
+	$(function () { //标题下拉的隐藏与显示
 		$("li").mouseover(function () {
 			$(this).children("div").show();
 		})
@@ -59,18 +58,23 @@
 			$(this).children("div").hide();
 		})
 	})
-	function loadIndexHtml(newHtmlUrl) {
-		var myIndexHtml = new XMLHttpRequest();
+	//使用div作为超链接，ajax技术更新网页模块而不影响nav标题和其他元素
+	//loadIndexHtml(网页链接，更新的模块高度)
+	jQuery.support.cors=true;
+	function loadIndexHtml(newHtmlUrl, myIframeHight_str) {
+		document.getElementById("myIframe").style.height = myIframeHight_str;
+		$("#myIframe").load(newHtmlUrl);
+		/*var myIndexHtml = new XMLHttpRequest();//无法支持jQuery的备用
 		myIndexHtml.onreadystatechange = function () {
 			document.getElementById("myIframe").innerHTML = myIndexHtml.responseText;
 		}
 		myIndexHtml.open("GET", newHtmlUrl, true);
-		myIndexHtml.send();
+		myIndexHtml.send();*/
 	}
 </script>
 </head>
 <body>
-<nav height="70">
+<nav height="70"  style="min-width: 850px;">
 	<ul>
 		<a href="/index.html">
 			<img src="/img/logo.png" width="175" height="50" />
@@ -78,58 +82,48 @@
 	</ul>
 	<ul>
 		<li>
-			<a href="/test.html" target="myIframe">
+			<a href="/index.html" >
 				<div class="myNavItem">主页</div>
 			</a>
 		</li>
 		<li>
-			<a href="" target="myIframe">
-				<div class="myNavItem">医生工作站</div>
+			<a>
+				<div class="myNavItem" style="padding: 2.5%;">COVID-19<br/>新冠病毒检测</div>
 			</a>
 			<div class="myNavList">
-				<a onclick="loadIndexHtml('/doc_COVID19_TestForm.html')" >
-					<div class="myNavItem">新冠病毒检测登记表</div>
+				<a onclick="loadIndexHtml('/doc_COVID19_TestForm.html', '650px')" >
+					<div class="myNavItem">登记表</div>
+				</a>
+			</div>
+			<div class="myNavList">
+				<a onclick="loadIndexHtml('lis_COVID19_TestCheck.html')" >
+					<div class="myNavItem">检测结果上报</div>
+				</a>
+			</div>
+			<div class="myNavList">
+				<a onclick="loadIndexHtml('/lis_COVID19_TestCheck.html')" >
+					<div class="myNavItem">呈批/下载</div>
 				</a>
 			</div>
 		</li>
 		<li>
-			<a href="" target="myIframe">
-				<div class="myNavItem">护理部</div>
-			</a>
-			<div class="myNavList">
-				<a href="/lis_COVID19_TestCheck.html" target="myIframe">
-					<div class="myNavItem">新冠病毒检测结果上报</div>
-				</a>
-			</div>
-		</li>
-		<li>
-			<a href="" target="myIframe">
-				<div class="myNavItem">检验科</div>
-			</a>
-			<div class="myNavList">
-				<a href="/lis_COVID19_TestCheck.html" target="myIframe">
-					<div class="myNavItem">新冠病毒检测结果呈批</div>
-				</a>
-			</div>
-		</li>
-		<li>
-			<a href="" target="myIframe">
+			<a href="" >
 				<div class="myNavItem">医保/财务/审计</div>
 			</a>
 			<div class="myNavList">
-				<a href="" target="myIframe">
-					<div class="myNavItem">特殊门诊办卡记录</div>
+				<a onclick="" >
+					<div class="myNavItem">特殊门诊卡记录</div>
 				</a>
-				<a href="/ybb_points.html" target="myIframe">
+				<a onclick="loadIndexHtml('/ybb_points.html')" >
 					<div class="myNavItem">分值/费用测算</div>
 				</a>
-				<a href="" target="myIframe">
+				<a onclick="" >
 					<div class="myNavItem">相关文件下载</div>
 				</a>
 			</div>
 		</li>
 		<li>
-			<a href="" target="myIframe">
+			<a href="" >
 				<div class="myNavItem">特殊情况</div>
 			</a>
 			<div class="myNavList">
@@ -143,7 +137,7 @@
 <hr>
 <div id="myIframe" name="myIframe" class="myIframe"></div>
 <div align="center" style="background-color:#4267ac;color:#FFF;font-size:12px;font-variant:small-caps;height:50px;padding-top:25px;">
-    <a href="/about.html">关于我们</a>&nbsp;<a href="/test/index.html">测试网页</a>&nbsp;<img src="/img/tel.png" width="12" height="12"/>2293025&nbsp;<img src="/img/tel.png" width="12" height="12"/>2293022 工作时间 周一至周五8:00-11:30或12:30-17:30
+    <a onclick="loadIndexHtml('/about.html')">关于我们</a>&nbsp;<a onclick="loadIndexHtml('/index.html')">测试网页</a>&nbsp;<img src="/img/tel.png" width="12" height="12"/>2293025&nbsp;<img src="/img/tel.png" width="12" height="12"/>2293022 工作时间 周一至周五8:00-11:30或12:30-17:30
     <br>
     <span style="font-style:oblique;">版权所有 © 2021 肇庆市端州区人民院医保办 保留所有权利。</span>
 </div>
