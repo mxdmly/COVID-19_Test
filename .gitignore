@@ -25,3 +25,8 @@ hs_err_pid*
 # 忽略jQuery库
 /js/jquery.js
 
+# 忽略img图片文件夹
+/img/*
+
+# 忽略错误提示html
+index_Apache.html
