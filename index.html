@@ -8,8 +8,20 @@
     img{
         border-style:none;
     }
+	.myNav{
+		justify-content: space-between;
+		min-width: 850px;
+		height: 70px;
+		padding-bottom: 0px;
+		border-bottom:1px solid rgb(0, 0, 0)
+	}
 	nav{
 		display:flex;
+		justify-content: space-between;
+		min-width: 850px;
+		height: 70px;
+		padding-bottom: 0px;
+		border-bottom:1px solid rgb(0, 0, 0);
 	}
 	a{
 		text-decoration: none;
@@ -34,6 +46,7 @@
 	}
 	.myIframe{
 		margin: auto;
+		text-align: center;
 		width: 990px;
 		height: 450px;
 		border:medium none;
@@ -45,7 +58,7 @@
 	}
 	.myNavList{
 		display: none;
-		background-color: rgb(240, 240, 240)
+		background-color: rgb(240, 240, 240);
 	}
 </style>
 <script src="js/jquery.js"></script>
@@ -74,7 +87,8 @@
 </script>
 </head>
 <body>
-<nav height="70"  style="min-width: 850px;">
+<div class="myNav">
+<nav>
 	<ul>
 		<a href="/index.html">
 			<img src="/img/logo.png" width="175" height="50" />
@@ -87,44 +101,57 @@
 			</a>
 		</li>
 		<li>
-			<a>
+			<a href="#">
 				<div class="myNavItem" style="padding: 2.5%;">COVID-19<br/>新冠病毒检测</div>
 			</a>
 			<div class="myNavList">
-				<a onclick="loadIndexHtml('/doc_COVID19_TestForm.html', '650px')" >
+				<a href="#" onclick="loadIndexHtml('/doc_COVID19_TestForm.html', '650px')" >
 					<div class="myNavItem">登记表</div>
 				</a>
 			</div>
 			<div class="myNavList">
-				<a onclick="loadIndexHtml('lis_COVID19_TestCheck.html')" >
+				<a href="#" onclick="loadIndexHtml('lis_COVID19_TestCheck.html')" >
 					<div class="myNavItem">检测结果上报</div>
 				</a>
 			</div>
 			<div class="myNavList">
-				<a onclick="loadIndexHtml('/lis_COVID19_TestCheck.html')" >
+				<a href="#" onclick="loadIndexHtml('/lis_COVID19_TestCheck.html')" >
 					<div class="myNavItem">呈批/下载</div>
 				</a>
 			</div>
 		</li>
 		<li>
-			<a href="" >
-				<div class="myNavItem">医保/财务/审计</div>
+			<a href="#" >
+				<div class="myNavItem">医保办</div>
 			</a>
 			<div class="myNavList">
-				<a onclick="" >
+				<a href="#" onclick="" >
 					<div class="myNavItem">特殊门诊卡记录</div>
 				</a>
-				<a onclick="loadIndexHtml('/ybb_points.html')" >
+				<a href="#" onclick="loadIndexHtml('/ybb_points.html', '300px')" >
 					<div class="myNavItem">分值/费用测算</div>
 				</a>
-				<a onclick="" >
+				<a href="#" onclick="" >
 					<div class="myNavItem">相关文件下载</div>
 				</a>
 			</div>
 		</li>
 		<li>
-			<a href="" >
-				<div class="myNavItem">特殊情况</div>
+			<a href="#" >
+				<div class="myNavItem">财务/审计</div>
+			</a>
+			<div class="myNavList">
+				<a href="#" onclick="" >
+					<div class="myNavItem">门诊药比</div>
+				</a>
+				<a href="#" onclick="loadIndexHtml('/ybb_points.html', '300px')" >
+					<div class="myNavItem">其他报表</div>
+				</a>
+			</div>
+		</li>
+		<li>
+			<a href="#" >
+				<div class="myNavItem">外网链接</div>
 			</a>
 			<div class="myNavList">
 				<a href="https://syfw.gdwst.gov.cn/pdc/">
@@ -134,10 +161,10 @@
 		</li>
 	</ul>
 </nav>
-<hr>
+</div>
 <div id="myIframe" name="myIframe" class="myIframe"></div>
 <div align="center" style="background-color:#4267ac;color:#FFF;font-size:12px;font-variant:small-caps;height:50px;padding-top:25px;">
-    <a onclick="loadIndexHtml('/about.html')">关于我们</a>&nbsp;<a onclick="loadIndexHtml('/index.html')">测试网页</a>&nbsp;<img src="/img/tel.png" width="12" height="12"/>2293025&nbsp;<img src="/img/tel.png" width="12" height="12"/>2293022 工作时间 周一至周五8:00-11:30或12:30-17:30
+    <a onclick="loadIndexHtml('./about.html', '800px')">关于我们</a>&nbsp;<a onclick="loadIndexHtml('/index_body.html')">测试网页</a>&nbsp;<img src="/img/tel.png" width="12" height="12"/>2293025&nbsp;<img src="/img/tel.png" width="12" height="12"/>2293022 工作时间 周一至周五8:00-11:30或12:30-17:30
     <br>
     <span style="font-style:oblique;">版权所有 © 2021 肇庆市端州区人民院医保办 保留所有权利。</span>
 </div>

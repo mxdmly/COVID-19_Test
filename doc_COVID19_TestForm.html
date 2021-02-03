@@ -52,6 +52,7 @@
                 border:2px solid rgb(0, 0, 0);
             }
         </style>
+        <script src="js/jquery.js"></script>
         <script>
             function displayDate() { //显示采样时间
                 var myDateTime = new Date();
@@ -89,12 +90,12 @@
                 }
             }
             function myReset() { //刷新
-                location.reload();
+                displayDate();
             }
         </script>
     </head>
     <body onload="displayDate()">
-        <div class="myClass">
+        <div id="myClass" class="myClass">
             <table >
                 <tr>
                     <th>
