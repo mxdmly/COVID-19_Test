@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>端州医院医保办</title>
-<link rel="stylesheet" type="text/css" href="styles.css">
 <style>
     img{
         border-style:none;
@@ -101,16 +100,21 @@
 			</a>
 		</li>
 		<li>
-			<a href="#" onclick="loadIndexHtml('/doc_COVID19.html', '1650px')">
+			<a href="#" >
 				<div class="myNavItem" style="padding: 2.5%;">COVID-19<br/>新冠病毒检测</div>
 			</a>
+			<div class="myNavList">
+				<a href="#" onclick="loadIndexHtml('/doc_COVID19.html', '1650px')" >
+					<div class="myNavItem">疫情风险提醒</div>
+				</a>
+			</div>
 			<div class="myNavList">
 				<a href="#" onclick="loadIndexHtml('/doc_COVID19_TestForm.html', '650px')" >
 					<div class="myNavItem">登记表</div>
 				</a>
 			</div>
 			<div class="myNavList">
-				<a href="#" onclick="loadIndexHtml('lis_COVID19_TestCheck.html')" >
+				<a href="#" onclick="loadIndexHtml('lis_COVID19_TestCheck.html', '950px')" >
 					<div class="myNavItem">检测结果上报</div>
 				</a>
 			</div>
@@ -120,7 +124,7 @@
 				</a>
 			</div>
 		</li>
-		<li>
+		<li style="display: none;">
 			<a href="#" >
 				<div class="myNavItem">医保办/财务科</div>
 			</a>
@@ -171,9 +175,9 @@
 	</ul>
 </nav>
 </div>
-<div id="myIframe" name="myIframe" class="myIframe"></div>
+<div id="myIframe" name="myIframe" class="myIframe" ></div>
 <div align="center" style="background-color:#4267ac;color:#FFF;font-size:12px;font-variant:small-caps;height:50px;padding-top:25px;">
-    <a onclick="loadIndexHtml('./about.html', '800px')">关于我们</a>&nbsp;<a onclick="loadIndexHtml('/index_body.html')">测试网页</a>&nbsp;<img src="/img/tel.png" width="12" height="12"/>2293025&nbsp;<img src="/img/tel.png" width="12" height="12"/>2293022 工作时间 周一至周五8:00-11:30或12:30-17:30
+    <a onclick="loadIndexHtml('./about.html', '800px')">关于我们</a>&nbsp;<a onclick="loadIndexHtml('/test.html', '600px')">测试网页</a>&nbsp;<img src="/img/tel.png" width="12" height="12"/>2293025&nbsp;<img src="/img/tel.png" width="12" height="12"/>2293022 工作时间 周一至周五8:00-11:30或12:30-17:30
     <br>
     <span style="font-style:oblique;">版权所有 © 2021 肇庆市端州区人民院医保办 保留所有权利。</span>
 </div>

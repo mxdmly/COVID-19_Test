@@ -1,37 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="utf-8">
-<script>
-function loadXMLDoc()
-{
-	var xmlhttp;
-	if (window.XMLHttpRequest)
-	{
-		//  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
-		xmlhttp=new XMLHttpRequest();
-	}
-	else
-	{
-		// IE6, IE5 浏览器执行代码
-		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	xmlhttp.onreadystatechange=function()
-	{
-		if (xmlhttp.readyState==4 && xmlhttp.status==200)
-		{
-			document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-		}
-	}
-	xmlhttp.open("GET","sdsadd",true);
-	xmlhttp.send();
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script src="scripts/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+$(function () {
+//获取表格的行数
+var tabRowLen = $("table tbody tr").length;
+//点击add按钮时，
+$("#add").on("click", function () {
+//获取表格的行数
+tabRowLen = $("table tbody tr").length;
+var index = tabRowLen - 1;
+//表格行数为0时，或者表格不存在空值时
+if (IsNull(index) || tabRowLen == 0) {
+//添加一行
+$("table tbody").append("<tr>" +
+"<td><input type=‘text‘ class=‘Name‘/><div id=‘dName" + tabRowLen + "‘></div></td>" +
+"<td><input type=‘text‘ class=‘Age‘/><div id=‘dAge" + tabRowLen + "‘></div></td>" +
+"<td><input type=‘button‘ class=‘add‘ value=‘delete ‘ /></td></tr>");
+//删除一行
+$(".add").on("click", function () {
+$(this).parents("tr").remove();
+});
 }
+//keyup事件
+$("table input").on("keyup", function () {
+//验证是否有空值
+IsNull(index);
+});
+});
+
+function IsNull(trIndex) {
+var result = true;
+debugger;
+//遍历表格的input
+$("table tbody input").each(function (trIndex) {
+//判断是否存在空值
+if ($("table tbody input")[trIndex].value == "") {
+//提示空值
+result = false;
+$(this).next().html("required");
+}
+//不为空
+else {
+//清空提示信息
+$(this).next().html("");
+}
+});
+return result;
+};
+});
 </script>
 </head>
 <body>
-
-<div id="myDiv"><h2>使用 AJAX 修改该文本内容</h2></div>
-<a onclick="loadXMLDoc()">修改内容</button>
-
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Age</th>
+<th><input type="button" id="add" value="addRow " /></th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
 </body>
 </html>

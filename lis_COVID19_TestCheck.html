@@ -1,9 +1,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>检测结果上报表</title>
+	<style>
+		table{
+			text-align: center;
+			margin: 0;
+			width: 100%;
+			border:10px solid rgb(151, 228, 164);
+		}
+	</style>
+	<script src="js/jquery.js"></script>
+	<script>
+		function addList() {
+			for (let i = 0; i < 100; i++) {
+				var mytr = $("<tr>1 </tr>");
+				$("#myListTable").append(mytr);
+			}
+		}
+		$(document).ready(function () {
+			addList();
+		})
+		$(function () { //高亮显示
+			$("#myTable").mouseover(function () {
+				$(this).css("background-color: aqua");
+			})
+			$("#myTable").mouseout(function () {
+				$(this).css("background-color: aqua");
+			})
+		})
+	</script>
 </head>
 <body>
-	
+	<div>
+		<div style="margin-top:10px;margin-bottom:10px;">
+			<table style="border: 0px;">
+				<tr>
+					<td style="float: left;padding: 10px;">
+						<b>检验结果上报</b>
+					</td>
+					<td style="float: right;">
+						<input type="button" value="结果上报" style="padding: 10px;"/>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<table id="myListTable" >
+			<tr style="background-color: rgb(129, 230, 191);">
+				<td>序号</td>
+				<td>是否上报</td>
+				<td>姓名</td>
+				<td>身份证</td>
+				<td>检测结果</td>
+				<td>检测时间</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td><input type="checkbox" checked="ture"/></td>
+				<td>张三</td>
+				<td>441202199702145210</td>
+				<td>阴性</td>
+				<td><input type="text" value="2021/1/01 12:00:00"/></td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td><input type="checkbox" checked="ture"/></td>
+				<td>李四</td>
+				<td>441202199702145210</td>
+				<td>阴性</td>
+				<td><input type="text" value="2021/1/01 12:00:00"/></td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td><input type="checkbox" checked="ture"/></td>
+				<td>王五</td>
+				<td>441202199702145210</td>
+				<td>阴性</td>
+				<td><input type="text" value="2021/1/01 12:00:00"/></td>
+			</tr>
+		</table>
+	</div>
 </body>
 </html>
