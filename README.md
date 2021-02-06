@@ -8,3 +8,8 @@ Ajax不支持body onload，改用$(document).ready(function () {})
 
 增加vue支持
 --vue不支持ie8，改用React
+
+2021年2月6日
+使用React v0.14.8
+https://cdn.staticfile.org/react/0.14.8/react-dom.js
+https://cdn.staticfile.org/react/0.14.8/react.js

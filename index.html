@@ -4,16 +4,6 @@
 <meta charset="UTF-8">
 <title>端州医院医保办</title>
 <style>
-    img{
-        border-style:none;
-    }
-	.myNav{
-		justify-content: space-between;
-		min-width: 850px;
-		height: 70px;
-		padding-bottom: 0px;
-		border-bottom:1px solid rgb(0, 0, 0)
-	}
 	nav{
 		display:flex;
 		justify-content: space-between;
@@ -22,15 +12,33 @@
 		padding-bottom: 0px;
 		border-bottom:1px solid rgb(0, 0, 0);
 	}
-	a{
-		text-decoration: none;
-		text-align: center;
-		cursor: pointer;
+	.myNav{
+		justify-content: space-between;
+		min-width: 850px;
+		height: 70px;
+		padding-bottom: 0px;
+		border-bottom:1px solid rgb(0, 0, 0);
+		z-index: 9999;
+		position: relative;
 	}
-	a:link{color: #000000 !important}/*设置全局未点击链接的颜色*/
-	a:visited {color: #000000 !important} /*设置全局被点击后的链接颜色*/
-	a:hover {color: #0077ff !important} /*设置全局鼠标悬停在链接上未点击时的颜色*/
-	a:active {color: #73daff !important} /*设置全局鼠标在点击链接瞬间发生的动作*/
+	.myNavItem{
+		padding: 10%;
+		text-align: center;
+		background-color: rgb(240, 240, 240);
+	}
+	.myNavList{
+		display: none;
+		background-color: rgb(240, 240, 240);
+	}
+	.myIframe{
+		margin: auto;
+		text-align: center;
+		width: 990px;
+		height: 450px;
+		border:medium none;
+		z-index: 1;
+		position: relative;
+	}
 	ul{
 		background-color: rgb(255, 255, 255);
 		float: left;
@@ -43,22 +51,18 @@
 		float: left;
 		list-style: none;
 	}
-	.myIframe{
-		margin: auto;
+    img{
+        border-style:none;
+    }
+	a{
+		text-decoration: none;
 		text-align: center;
-		width: 990px;
-		height: 450px;
-		border:medium none;
+		cursor: pointer;
 	}
-	.myNavItem{
-		padding: 10%;
-		text-align: center;
-		background-color: rgb(240, 240, 240);
-	}
-	.myNavList{
-		display: none;
-		background-color: rgb(240, 240, 240);
-	}
+	a:link{color: #000000 !important}/*设置全局未点击链接的颜色*/
+	a:visited {color: #000000 !important} /*设置全局被点击后的链接颜色*/
+	a:hover {color: #0077ff !important} /*设置全局鼠标悬停在链接上未点击时的颜色*/
+	a:active {color: #73daff !important} /*设置全局鼠标在点击链接瞬间发生的动作*/
 </style>
 <script src="js/jquery.js"></script>
 <script>

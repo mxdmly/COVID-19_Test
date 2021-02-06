@@ -1,69 +1,40 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
-<script src="scripts/jquery-1.10.2.js"></script>
-<script type="text/javascript">
-$(function () {
-//获取表格的行数
-var tabRowLen = $("table tbody tr").length;
-//点击add按钮时，
-$("#add").on("click", function () {
-//获取表格的行数
-tabRowLen = $("table tbody tr").length;
-var index = tabRowLen - 1;
-//表格行数为0时，或者表格不存在空值时
-if (IsNull(index) || tabRowLen == 0) {
-//添加一行
-$("table tbody").append("<tr>" +
-"<td><input type=‘text‘ class=‘Name‘/><div id=‘dName" + tabRowLen + "‘></div></td>" +
-"<td><input type=‘text‘ class=‘Age‘/><div id=‘dAge" + tabRowLen + "‘></div></td>" +
-"<td><input type=‘button‘ class=‘add‘ value=‘delete ‘ /></td></tr>");
-//删除一行
-$(".add").on("click", function () {
-$(this).parents("tr").remove();
-});
-}
-//keyup事件
-$("table input").on("keyup", function () {
-//验证是否有空值
-IsNull(index);
-});
-});
-
-function IsNull(trIndex) {
-var result = true;
-debugger;
-//遍历表格的input
-$("table tbody input").each(function (trIndex) {
-//判断是否存在空值
-if ($("table tbody input")[trIndex].value == "") {
-//提示空值
-result = false;
-$(this).next().html("required");
-}
-//不为空
-else {
-//清空提示信息
-$(this).next().html("");
-}
-});
-return result;
-};
-});
-</script>
+<meta charset="UTF-8" />
+<title>菜鸟教程 React 实例</title>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
 </head>
 <body>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Age</th>
-<th><input type="button" id="add" value="addRow " /></th>
-</tr>
-</thead>
-<tbody></tbody>
-</table>
+
+<div id="example"></div>
+<script type="text/babel">
+function Name(props) {
+	return <h1>网站名称：{props.name}</h1>;
+}
+function Url(props) {
+	return <h1>网站地址：{props.url}</h1>;
+}
+function Nickname(props) {
+	return <h1>网站小名：{props.nickname}</h1>;
+}
+function App() {
+	return (
+	<div>
+		<Name name="菜鸟教程" />
+		<Url url="http://www.runoob.com" />
+		<Nickname nickname="Runoob" />
+	</div>
+	);
+}
+
+ReactDOM.render(
+	 <App />,
+	document.getElementById('example')
+);
+</script>
+
 </body>
 </html>
