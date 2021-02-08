@@ -49,7 +49,8 @@
                 font-size: 15px;
                 font-weight: normal;
                 padding: 30px;
-                border:2px solid rgb(0, 0, 0);
+                color:rgb(92, 92, 92);
+                border:2px solid rgb(128, 128, 128);
             }
         </style>
         <script src="js/jquery.js"></script>
@@ -444,7 +445,7 @@
                                 <option value="也门">也门</option>
                                 <option value="赞比亚">赞比亚</option>
                             </select>
-                            参保类型：<select name="insType" id="insType" class="mySelect_Little">
+                            参保地区：<select name="insType" id="insType" class="mySelect_Little">
                                 <option value="本市">本市</option>
                                 <option value="省内异地">省内异地</option>
                                 <option value="非参保人">非参保人</option>  
@@ -458,15 +459,14 @@
                             </select>
                             <br/>
                             人员来源：<select name="peopleSource" id="peopleSource" >
-                                <option value=""></option>
+                                <option value="6">其他门（急）诊</option>
+                                <option value="5">发热门诊</option>
+                                <option value="7">住院患者</option>
+                                <option value="8">住院患者陪护人员</option>
                                 <option value="1">集中留观</option>
                                 <option value="2">密切接触者</option>
                                 <option value="3">交通检疫</option>
                                 <option value="4">社区排查</option>
-                                <option value="5">发热门诊</option>
-                                <option value="6">其他门（急）诊</option>
-                                <option value="7">住院患者</option>
-                                <option value="8">住院患者陪护人员</option>
                                 <option value="9">农贸市场专项排查</option>
                                 <option value="99">其它采样点</option>
                             </select>
@@ -506,7 +506,7 @@
                                 <option value="其他">其他</option>
                             </select>
                             <br/>
-                            &emsp;参保地：<input id="insLocation" type="text" maxlength="100" />
+                            &emsp;参保市：<input id="insLocation" type="text" maxlength="100" />
                             <br/>
                             单位名称：<input id="samplingOrg" type="text" maxlength="255" />
                         </th>

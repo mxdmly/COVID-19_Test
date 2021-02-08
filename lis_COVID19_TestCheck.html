@@ -7,13 +7,13 @@
 			text-align: center;
 			margin: 0;
 			width: 100%;
-			border:10px solid rgb(151, 228, 164);
+			border: 10px solid rgb(151, 228, 164);
 		}
 	</style>
 	<script src="js/jquery.js"></script>
 	<script>
 		function addList() {
-			for (let i = 0; i < 100; i++) {
+			for (i = 0; i < 0; i++) {
 				var mytr = $("<tr>1 </tr>");
 				$("#myListTable").append(mytr);
 			}
@@ -22,10 +22,10 @@
 			addList();
 		})
 		$(function () { //高亮显示
-			$("#myTable").mouseover(function () {
+			$("#myListTable").mouseover(function () {
 				$(this).css("background-color: aqua");
 			})
-			$("#myTable").mouseout(function () {
+			$("#myListTable").mouseout(function () {
 				$(this).css("background-color: aqua");
 			})
 		})
@@ -33,17 +33,9 @@
 </head>
 <body>
 	<div>
-		<div style="margin-top:10px;margin-bottom:10px;">
-			<table style="border: 0px;">
-				<tr>
-					<td style="float: left;padding: 10px;">
-						<b>检验结果上报</b>
-					</td>
-					<td style="float: right;">
-						<input type="button" value="结果上报" style="padding: 10px;"/>
-					</td>
-				</tr>
-			</table>
+		<div style="margin-top: 10px;margin-bottom:10px;">
+			<input type="button" value="结果上报" style="width: 100px;padding: 10px;"/>
+			<input type="button" value="刷新" style="width: 100px; padding: 10px;"/>
 		</div>
 		<table id="myListTable" >
 			<tr style="background-color: rgb(129, 230, 191);">
@@ -56,7 +48,7 @@
 			</tr>
 			<tr>
 				<td>1</td>
-				<td><input type="checkbox" checked="ture" style="width: 100px;"/></td>
+				<td><input type="checkbox" checked="ture"/></td>
 				<td>张三</td>
 				<td>441202199702145210</td>
 				<td>阴性</td>
