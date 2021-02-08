@@ -1,40 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
-<title>菜鸟教程 React 实例</title>
-<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
-<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
-<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+	<meta charset="utf-8">
+	<title>菜鸟教程(runoob.com)</title>
+	<script src="js/jquery.js"></script>
+	<script>
+		$(function() {
+			$("#mybt").click(function () {
+				$.get("doc_COVID19_TestForm_return.jsp",function (data,status) {
+					alert("name" + data + "\n url:" + status);
+				});
+			});
+		});
+	</script>
 </head>
 <body>
-
-<div id="example"></div>
-<script type="text/babel">
-function Name(props) {
-	return <h1>网站名称：{props.name}</h1>;
-}
-function Url(props) {
-	return <h1>网站地址：{props.url}</h1>;
-}
-function Nickname(props) {
-	return <h1>网站小名：{props.nickname}</h1>;
-}
-function App() {
-	return (
-	<div>
-		<Name name="菜鸟教程" />
-		<Url url="http://www.runoob.com" />
-		<Nickname nickname="Runoob" />
-	</div>
-	);
-}
-
-ReactDOM.render(
-	 <App />,
-	document.getElementById('example')
-);
-</script>
-
+	<form action="doc_COVID19_TestForm_return.jsp" method="POST">
+		站点名: <input type="text" name="name">
+		<br />
+		网址: <input type="text" name="url" />
+		<input id="mybt" type="button" value="提交" />
+	</form>
 </body>
 </html>

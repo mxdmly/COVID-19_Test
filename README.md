@@ -13,3 +13,6 @@ Ajax不支持body onload，改用$(document).ready(function () {})
 使用React v0.14.8
 https://cdn.staticfile.org/react/0.14.8/react-dom.js
 https://cdn.staticfile.org/react/0.14.8/react.js
+
+2021年2月9日
+改用tomcat，用jsp响应用户表单请求
