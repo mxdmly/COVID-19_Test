@@ -124,7 +124,7 @@
                 <tr>
                     <th>
                         <div class="myDiv_TitleTop">
-                            新冠病毒核酸检测咽拭子采集登记表（院内检测专用）update
+                            新冠病毒核酸检测咽拭子采集登记表（院内检测专用）
                         </div>
                     </th>
                     <th rowspan="2">
@@ -149,8 +149,8 @@
                             门诊卡号：<input id="myHosId" name="myHosId" type="text" maxlength="12"/>
                             <font style="color: black;">*暂时不支持刷卡自动填写，以后改进</font>
                             <br/>
-                            &emsp;<font>一</font>姓名：<input id="myName" type="text" maxlength="16" />
-                            证件类型：<select name="idType" id="idType" style="width: 300px;" >
+                            &emsp;<font>一</font>姓名：<input id="myName" name="myName" type="text" maxlength="16" />
+                            证件类型：<select id="idType" name="idType" style="width: 300px;" >
                                 <option value="居民身份证">居民身份证</option>
                                 <option value="护照">护照</option>
                                 <option value="港澳居民来往内地通行证（俗称回乡证）">港澳居民来往内地通行证（俗称回乡证）</option>
@@ -159,16 +159,16 @@
                                 <option value="其他">其他</option>
                             </select>
                             <br/>
-                            手机号码：<input id="myPhoneNum" type="text" maxlength="16" />
-                            证件号码：<input id="idNum" type="text" maxlength="18" style="width: 176px;" onblur="setIdData()"/>
-                            性别：<label for="male">男</label><input type="radio" name="sex" id="male" class="selectStyle"/>
-                            <label for="female">女</label><input type="radio" name="sex" id="female" class="selectStyle"/>
+                            手机号码：<input id="myPhoneNum" name="myPhoneNum" type="text" maxlength="16" />
+                            证件号码：<input id="idNum" name="idNum" type="text" maxlength="18" style="width: 176px;" onblur="setIdData()"/>
+                            性别：<label for="male">男</label><input type="radio" name="sex" id="male" value="男" class="selectStyle"/>
+                            <label for="female">女</label><input type="radio" name="sex" id="female" value="女" class="selectStyle"/>
                         </th>
                         <th style="border-bottom:0px;">
                             <h3>基本信息(选填)</h3>
-                            &emsp;&emsp;年龄：<input id="age" type="text" maxlength="3" style="width:50px;"/> 岁(整数)
+                            &emsp;&emsp;年龄：<input name="_age" id="_age" type="text" maxlength="3" style="width:50px;"/> 岁(整数)
                             <br/>
-                            &emsp;&emsp;省区：<select name="sheng" id="sheng">
+                            &emsp;&emsp;省区：<select name="_sheng" id="_sheng">
                                 <option value=""></option>
                                 <option value="广东省">广东省</option>
                                 <option value="北京市">北京市</option>
@@ -207,7 +207,7 @@
                                 <option value="澳门特别行政区">澳门特别行政区</option>
                             </select>
                             <br/>
-                            &emsp;&emsp;城市：<input id="city" type="text" maxlength="16"/>
+                            &emsp;&emsp;城市：<input name="_city" id="_city" type="text" maxlength="16"/>
                         </th>
                     </tr>
                     <tr>
@@ -506,11 +506,11 @@
                             </select>
                             <br/>
                             14天内境外入境人员(采样时判定)：
-                            <label for="yes">是</label><input type="radio" name="myEntry" id="yes" class="selectStyle" />
-                            <label for="no">否</label><input type="radio" name="myEntry" id="no" checked="yes" class="selectStyle" />
+                            <label for="yes">是</label><input type="radio" name="myEntry" id="yes" value="是" class="selectStyle" />
+                            <label for="no">否</label><input type="radio" name="myEntry" id="no" value="否" checked="yes" class="selectStyle" />
                         </th>
                         <th style="border-top:0px;border-bottom:0px;">
-                            &emsp;&emsp;险种：<select name="insType_2" id="insType_2" >
+                            &emsp;&emsp;险种：<select name="_insType_2" id="_insType_2" >
                                 <option value=""></option>
                                 <option value="职工医保">职工医保</option>
                                 <option value="居民医保">居民医保</option>
@@ -519,14 +519,14 @@
                                 <option value="其他">其他</option>
                             </select>
                             <br/>
-                            &emsp;参保市：<input id="insLocation" type="text" maxlength="100" />
+                            &emsp;参保市：<input name="_insLocation" id="_insLocation" type="text" maxlength="100" />
                             <br/>
-                            单位名称：<input id="samplingOrg" type="text" maxlength="255" />
+                            单位名称：<input name="_samplingOrg" id="_samplingOrg" type="text" maxlength="255" />
                         </th>
                     </tr>
                     <tr>
                         <th style="border-top:0px;">
-                            采样时间：<input id="thisDaytime" type="text"/>
+                            采样时间：<input name="thisDaytime" id="thisDaytime" type="text"/>
                             标本类型：<select name="specimenType" id="specimenType" class="mySelect_Little">
                                 <option value="咽拭子">咽拭子</option>
                                 <option value="鼻咽拭子">鼻咽拭子</option>
@@ -542,9 +542,9 @@
                             </select>
                         </th>
                         <th style="border-top:0px;">
-                            采样机构：<input id="samplingIns" type="text" maxlength="100"  value="端州医院"/>
+                            采样机构：<input name="_samplingIns" id="_samplingIns" type="text" maxlength="100"  value="端州医院"/>
                             <br/>
-                            采样地点：<input id="samplingLocation" type="text" maxlength="100" value="城北路69号"/>
+                            采样地点：<input name="_samplingLocation" id="_samplingLocation" type="text" maxlength="100" value="城北路69号"/>
                         </th>
                     </tr>
                 </table>
