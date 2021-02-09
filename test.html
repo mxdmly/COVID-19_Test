@@ -7,15 +7,21 @@
 	<script>
 		$(function() {
 			$("#mybt").click(function () {
-				$.get("doc_COVID19_TestForm_return.jsp",function (data,status) {
-					alert("name" + data + "\n url:" + status);
-				});
+				$.ajax({
+					type:'post',
+					dataType:'text',
+					url:'doc_COVID19_TestForm_return.jsp',
+					data:$("#myform").serializeArray(),
+					success:function(data){
+						alert("保存成功！");
+					}
+				})
 			});
 		});
 	</script>
 </head>
 <body>
-	<form action="doc_COVID19_TestForm_return.jsp" method="POST">
+	<form action="doc_COVID19_TestForm_return.jsp" id="myform" method="POST">
 		站点名: <input type="text" name="name">
 		<br />
 		网址: <input type="text" name="url" />

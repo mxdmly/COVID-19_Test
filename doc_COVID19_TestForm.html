@@ -103,6 +103,19 @@
             function myReset() { //重置按钮
                 displayDate();
             }
+            $(function () { //表单提交给数据库
+                $("#update").click(function () {
+                    $.ajax({
+                        type:'post',
+                        dataType:'text',
+                        url:'doc_COVID19_TestForm_return.jsp',
+                        data:$("#peopleInfo").serializeArray(),
+                        success:function(){
+                            //alert("保存成功！");
+                        }
+                    })
+                })
+            })
         </script>
     </head>
     <body onload="displayDate()">
@@ -111,7 +124,7 @@
                 <tr>
                     <th>
                         <div class="myDiv_TitleTop">
-                            新冠病毒核酸检测咽拭子采集登记表（院内检测专用）
+                            新冠病毒核酸检测咽拭子采集登记表（院内检测专用）update
                         </div>
                     </th>
                     <th rowspan="2">
@@ -133,7 +146,7 @@
                     <tr>
                         <th style="border-bottom:0px;">
                             <h3>基本信息(<font style="color: rgb(255, 0, 0);">必填</font>)</h3>
-                            门诊卡号：<input id="myHosId" type="text" maxlength="12"/>
+                            门诊卡号：<input id="myHosId" name="myHosId" type="text" maxlength="12"/>
                             <font style="color: black;">*暂时不支持刷卡自动填写，以后改进</font>
                             <br/>
                             &emsp;<font>一</font>姓名：<input id="myName" type="text" maxlength="16" />
@@ -535,7 +548,7 @@
                         </th>
                     </tr>
                 </table>
-                <input type="submit" name="update" id="update" value="提交并打印" class="myUpdate" >
+                <input type="button" name="update" id="update" value="提交并打印" class="myUpdate" >
                 <input type="button" name="reset" id="reset" value="重置" class="myUpdate" onclick="myReset()">
             </form>
         </div>
