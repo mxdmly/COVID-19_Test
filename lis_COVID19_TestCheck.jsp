@@ -14,6 +14,7 @@
         String dispaly_str;//显示在html页面，由jsp生成的表格
     %>
     <%
+        /*
         String sql_str = "";//sql插入语句
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -38,12 +39,37 @@
             }
             rs.close();
             stmt.close();
-            connection.close();    
+            connection.close();
         }catch(Exception e){
             e.printStackTrace();
             out.println(e.toString());
         }
+        */
     %>
-    <%= dispaly_str %>
+    <%= "<table>" + 
+        "<tr>" +
+			"<td>2</td>"+
+			"<td><input type=\"checkbox\" checked=\"ture\"/></td>"+
+			"<td>李四</td>"+
+			"<td>441202199702145210</td>"+
+			"<td>阴性</td>"+
+			"<td><input type=\"text\" value=\"2021/1/01 12:00:00\"/></td>"+
+		"</tr>" +"<tr>"+
+			"<td>2</td>"+
+			"<td><input type=\"checkbox\" checked=\"ture\"/></td>"+
+			"<td>李四</td>"+
+			"<td>441202199702145210</td>"+
+			"<td>阴性</td>"+
+			"<td><input type=\"text\" value=\"2021/1/01 12:00:00\"/></td>"+
+		"</tr>"+"<tr>"+
+			"<td>2</td>"+
+			"<td><input type=\"checkbox\" checked=\"ture\"/></td>"+
+			"<td>李四</td>"+
+			"<td>441202199702145210</td>"+
+			"<td>阴性</td>"+
+			"<td><input type=\"text\" value=\"2021/1/01 12:00:00\"/></td>"+
+		"</tr>" + 
+        "</table>"
+    %>
 </body>
 </html>

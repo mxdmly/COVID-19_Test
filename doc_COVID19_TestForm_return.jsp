@@ -24,6 +24,7 @@
         }
     %>
     <%
+    /*
         //必填
         String myHospitalIdCard_str = request.getParameter("myHospitalIdCard");
         String myName_str = request.getParameter("myName");
@@ -101,7 +102,7 @@
             }
         }
         out.println(result_i + "    " + sql_str);
-
+    */
     %>
     <%= sqlCheck_b %>
 </body>

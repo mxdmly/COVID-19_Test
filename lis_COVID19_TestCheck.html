@@ -12,14 +12,25 @@
 	</style>
 	<script src="js/jquery.js"></script>
 	<script>
-		function addList() {
-			for (i = 0; i < 110; i++) {
-				$("#myListTable").append("<tr>1 </tr>");
-			}
+		function getList() { //获取数据库列表
+			$("#myListTable tr:not(:first)").remove();//删除第一行以外的数据
+            $.ajax({
+                //type:'post',
+                //dataType:'text',
+                url:'lis_COVID19_TestCheck.jsp',
+                //data:$("#peopleInfo").serializeArray(),
+                success:function(result){
+					var str = String(result);
+					var start_i = str.indexOf("<table>");
+					var stop_i = str.lastIndexOf("</table>");
+					str = str.slice(start_i + 7,stop_i);
+                	$("#myListTable").append(str);
+					//console.log(str);
+                }
+            })
 		}
 		$(document).ready(function () {
-			console.log("myjsp");
-			addList();
+			getList();
 		})
 		$(function () { //高亮显示
 			$("#myListTable").mouseover(function () {
@@ -32,16 +43,15 @@
 	</script>
 </head>
 <body>
-	<button type="button" onclick="location.href='lis_COVID19_TestCheck.jsp'"></button>
 	<div>
-		<div style="margin-top: 10px;margin-bottom:10px;">
+		<div style="margin-top: 10px;margin-bottom:10px;float: right;">
 			<input type="button" value="结果上报" style="width: 100px;padding: 10px;"/>
-			<input type="button" value="刷新" style="width: 100px; padding: 10px;"/>
+			<input type="button" value="刷新" onclick="getList()" style="width: 100px; padding: 10px;"/>
 		</div>
 		<table id="myListTable" >
 			<tr style="background-color: rgb(129, 230, 191);">
 				<td>序号</td>
-				<td>是否上报</td>
+				<td>是否上报<br><label for="allCheck" style="font-size: 10px;">（全选<input type="checkbox" id="allCheck" style="width: 10px;vertical-align: -10%;" />）</label></td>
 				<td>姓名</td>
 				<td>身份证</td>
 				<td>检测结果</td>
@@ -72,6 +82,11 @@
 				<td><input type="text" value="2021/1/01 12:00:00"/></td>
 			</tr>
 		</table>
+		<div style="margin-top: 10px;float: left;">
+			<input type="button" value="前一页" id="turnLeft" onclick="" style="height:25px;"/>
+			<input type="text" value="1" id="page" style="width:19px;height:19px;text-align: center;"/>
+			<input type="button" value="后一页" id="turnRight" onclick="" style="height:25px;"/>
+		</div>
 	</div>
 </body>
 </html>
