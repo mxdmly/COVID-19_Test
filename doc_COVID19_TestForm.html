@@ -61,7 +61,7 @@
             function displayDate() { //显示采样时间
                 var myDateTime = new Date();
                 var myMonth = myDateTime.getMonth() + 1;
-                document.getElementById("thisDaytime").value = 
+                document.getElementById("samplingTime").value = 
                 myDateTime.getFullYear() + "/" + 
                 myMonth + "/" + 
                 myDateTime.getDate() + " " + 
@@ -146,7 +146,7 @@
                     <tr>
                         <th style="border-bottom:0px;">
                             <h3>基本信息(<font style="color: rgb(255, 0, 0);">必填</font>)</h3>
-                            门诊卡号：<input id="myHosId" name="myHosId" type="text" maxlength="12"/>
+                            门诊卡号：<input id="myHospitalIdCard" name="myHospitalIdCard" type="text" maxlength="12"/>
                             <font style="color: black;">*暂时不支持刷卡自动填写，以后改进</font>
                             <br/>
                             &emsp;<font>一</font>姓名：<input id="myName" name="myName" type="text" maxlength="16" />
@@ -212,7 +212,7 @@
                     </tr>
                     <tr>
                         <th style="border-top:0px;border-bottom:0px;">
-                            <font>一</font>居住地：<select name="country" id="country">
+                            <font>一</font>居住地：<select name="countryAndRegion" id="countryAndRegion">
                                 <option value="中国">中国</option>
                                 <option value="中国澳门">中国澳门</option>
                                 <option value="中国台湾">中国台湾</option>
@@ -458,14 +458,14 @@
                                 <option value="也门">也门</option>
                                 <option value="赞比亚">赞比亚</option>
                             </select>
-                            参保地区：<select name="insType" id="insType" class="mySelect_Little">
+                            参保地区：<select name="insuranceSheng" id="insuranceSheng" class="mySelect_Little">
                                 <option value="本市">本市</option>
                                 <option value="省内异地">省内异地</option>
                                 <option value="非参保人">非参保人</option>  
                                 <option value="省外">省外</option>
                                 <option value="无法核实">无法核实</option>
                             </select>
-                            结算类型：<select name="insType_3" id="insType_3" class="mySelect_Little">
+                            结算类型：<select name="settlementType" id="settlementType" class="mySelect_Little">
                                 <option value="医保">医保</option>
                                 <option value="自费">自费</option>
                                 <option value="免费">免费</option>                    
@@ -506,11 +506,11 @@
                             </select>
                             <br/>
                             14天内境外入境人员(采样时判定)：
-                            <label for="yes">是</label><input type="radio" name="myEntry" id="yes" value="是" class="selectStyle" />
-                            <label for="no">否</label><input type="radio" name="myEntry" id="no" value="否" checked="yes" class="selectStyle" />
+                            <label for="yes">是</label><input type="radio" name="immigrationWithinFTDays" id="yes" value="是" class="selectStyle" />
+                            <label for="no">否</label><input type="radio" name="immigrationWithinFTDays" id="no" value="否" checked="yes" class="selectStyle" />
                         </th>
                         <th style="border-top:0px;border-bottom:0px;">
-                            &emsp;&emsp;险种：<select name="_insType_2" id="_insType_2" >
+                            &emsp;&emsp;险种：<select name="_insuranceType" id="_insuranceType" >
                                 <option value=""></option>
                                 <option value="职工医保">职工医保</option>
                                 <option value="居民医保">居民医保</option>
@@ -519,14 +519,14 @@
                                 <option value="其他">其他</option>
                             </select>
                             <br/>
-                            &emsp;参保市：<input name="_insLocation" id="_insLocation" type="text" maxlength="100" />
+                            &emsp;参保市：<input name="_insuranceCity" id="_insuranceCity" type="text" maxlength="100" />
                             <br/>
-                            单位名称：<input name="_samplingOrg" id="_samplingOrg" type="text" maxlength="255" />
+                            单位名称：<input name="_unit" id="_unit" type="text" maxlength="255" />
                         </th>
                     </tr>
                     <tr>
                         <th style="border-top:0px;">
-                            采样时间：<input name="thisDaytime" id="thisDaytime" type="text"/>
+                            采样时间：<input name="samplingTime" id="samplingTime" type="text"/>
                             标本类型：<select name="specimenType" id="specimenType" class="mySelect_Little">
                                 <option value="咽拭子">咽拭子</option>
                                 <option value="鼻咽拭子">鼻咽拭子</option>
@@ -536,13 +536,13 @@
                                 <option value="肺泡灌洗液">肺泡灌洗液</option>
                                 <option value="粪便">粪便</option>
                             </select>
-                            检测项目：<select name="specimenItem" id="specimenItem" class="mySelect_Little">
+                            检测项目：<select name="testItems" id="testItems" class="mySelect_Little">
                                 <option value="核酸检测">核酸检测</option>
                                 <option value="IgG抗体检测">IgG抗体检测</option>
                             </select>
                         </th>
                         <th style="border-top:0px;">
-                            采样机构：<input name="_samplingIns" id="_samplingIns" type="text" maxlength="100"  value="端州医院"/>
+                            采样机构：<input name="_SamplingAgency" id="_SamplingAgency" type="text" maxlength="100"  value="端州医院"/>
                             <br/>
                             采样地点：<input name="_samplingLocation" id="_samplingLocation" type="text" maxlength="100" value="城北路69号"/>
                         </th>

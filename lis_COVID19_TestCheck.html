@@ -13,12 +13,12 @@
 	<script src="js/jquery.js"></script>
 	<script>
 		function addList() {
-			for (i = 0; i < 0; i++) {
-				var mytr = $("<tr>1 </tr>");
-				$("#myListTable").append(mytr);
+			for (i = 0; i < 110; i++) {
+				$("#myListTable").append("<tr>1 </tr>");
 			}
 		}
 		$(document).ready(function () {
+			console.log("myjsp");
 			addList();
 		})
 		$(function () { //高亮显示
@@ -32,6 +32,7 @@
 	</script>
 </head>
 <body>
+	<button type="button" onclick="location.href='lis_COVID19_TestCheck.jsp'"></button>
 	<div>
 		<div style="margin-top: 10px;margin-bottom:10px;">
 			<input type="button" value="结果上报" style="width: 100px;padding: 10px;"/>
