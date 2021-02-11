@@ -49,25 +49,25 @@
     <%= "<table>" + 
         "<tr>" +
 			"<td>2</td>"+
-			"<td><input type=\"checkbox\" checked=\"ture\"/></td>"+
+			"<td><input type='checkbox' checked='ture'/></td>"+
 			"<td>李四</td>"+
 			"<td>441202199702145210</td>"+
 			"<td>阴性</td>"+
-			"<td><input type=\"text\" value=\"2021/1/01 12:00:00\"/></td>"+
+			"<td><input type='text' value='2021/1/01 12:00:00'/></td>"+
 		"</tr>" +"<tr>"+
 			"<td>2</td>"+
-			"<td><input type=\"checkbox\" checked=\"ture\"/></td>"+
+			"<td><input type='checkbox' checked='ture'/></td>"+
 			"<td>李四</td>"+
 			"<td>441202199702145210</td>"+
 			"<td>阴性</td>"+
-			"<td><input type=\"text\" value=\"2021/1/01 12:00:00\"/></td>"+
+			"<td><input type='text' value='2021/1/01 12:00:00'/></td>"+
 		"</tr>"+"<tr>"+
 			"<td>2</td>"+
-			"<td><input type=\"checkbox\" checked=\"ture\"/></td>"+
+			"<td><input type='checkbox' checked='ture'/></td>"+
 			"<td>李四</td>"+
 			"<td>441202199702145210</td>"+
 			"<td>阴性</td>"+
-			"<td><input type=\"text\" value=\"2021/1/01 12:00:00\"/></td>"+
+			"<td><input type='text' value='2021/1/01 12:00:00'/></td>"+
 		"</tr>" + 
         "</table>"
     %>
