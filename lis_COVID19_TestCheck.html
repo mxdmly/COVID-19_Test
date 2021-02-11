@@ -1,9 +1,110 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>检测结果上报表</title>
+	<style>
+		table{
+			text-align: center;
+			margin: 0;
+			width: 100%;
+			border: 10px solid rgb(151, 228, 164);
+		}
+		input{
+			text-align: center;
+		}
+	</style>
+	<script src="js/jquery.js"></script>
+	<script>
+		function getList() { //获取数据库列表
+			//$("#myListTable tr:not(:first)").remove();//删除第一行以外的数据
+            $.ajax({
+                //type:'post',
+                //dataType:'text',
+                url:'lis_COVID19_TestCheck.jsp',
+                //data:$("#peopleInfo").serializeArray(),
+                success:function(result){
+					var str = String(result);
+					var start_i = str.indexOf("<table>");
+					var stop_i = str.lastIndexOf("</table>");
+					str = str.slice(start_i + 7,stop_i);
+                	$("#myListTable").append(str);
+					//console.log(str);
+					$("#myListTable tr:not(:first)").off(displaySpecialEffects());//移除事件重新绑定，不然会重复绑定越来越卡
+					$("#myListTable").on(displaySpecialEffects());
+                }
+            })
+		}
+		function uploadList() {//获取复选框的值上传
+			$("#myListTable tr:not(:first)").each(function () {
+				var ss = $(this).find("td").eq(1).html();
+				var sss = $(this).find("td").eq(5).html();
+				console.log(ss + "  " + sss);
+			})
+		}
+		$(document).ready(function () {//网页载入后立即执行的函数
+			$("#myListTable").one(displaySpecialEffects());
+			//getList();
+		})
+		function displaySpecialEffects() {//给每行添加选中特效，点击效果
+			$("tr:not(:first)").mouseover(function () {
+				$(this).css("background-color","rgb(216,227,231)");
+			});
+			$("tr:not(:first)").mouseout(function () {
+				$(this).css("background-color","white");
+			});
+			$("tr:not(:first)").click(function () {
+				console.log("s");
+				var myCheck = $(this).find("td:eq(1) input:eq(0)");
+				myCheck.prop("checked", ! myCheck.prop("checked"));
+			});
+		}
+	</script>
 </head>
 <body>
-	
+	<div>
+		<div style="margin-top: 10px;margin-bottom:10px;float: right;">
+			<input type="button" value="结果上报" onclick="uploadList()" style="width: 100px;padding: 10px;"/>
+			<input type="button" value="刷新" onclick="getList()" style="width: 100px; padding: 10px;"/>
+		</div>
+		<table id="myListTable" >
+			<tr style="background-color: rgb(129, 230, 191);">
+				<td>序号</td>
+				<td>是否上报<br><label for="allCheck" style="font-size: 10px;">（全选<input type="checkbox" id="allCheck" style="width: 10px;vertical-align: -10%;" />）</label></td>
+				<td>姓名</td>
+				<td>身份证</td>
+				<td>检测结果</td>
+				<td>检测时间</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td><input type="checkbox" checked="ture"/></td>
+				<td>张三</td>
+				<td>441202199702145210</td>
+				<td>阴性</td>
+				<td><input type="text" value="2021/1/01 12:00:00"/></td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td><input type="checkbox" checked="ture"/></td>
+				<td>李四</td>
+				<td>441202199702145210</td>
+				<td>阴性</td>
+				<td><input type="text" value="2021/1/01 12:00:00"/></td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td><input type="checkbox" checked="ture"/></td>
+				<td>王五</td>
+				<td>441202199702145210</td>
+				<td>阴性</td>
+				<td><input type="text" value="2021/1/01 12:00:00"/></td>
+			</tr>
+		</table>
+		<div style="margin-top: 10px;float: left;">
+			<input type="button" value="前一页" id="turnLeft" onclick="" style="height:25px;"/>
+			<input type="text" value="1" id="page" style="width:19px;height:19px;text-align: center;"/>
+			<input type="button" value="后一页" id="turnRight" onclick="" style="height:25px;"/>
+		</div>
+	</div>
 </body>
 </html>
