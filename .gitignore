@@ -23,7 +23,7 @@
 hs_err_pid*
 
 # 忽略jQuery库
-/js/*
+/js/jquery.js
 
 # 忽略img图片文件夹
 /img/*
