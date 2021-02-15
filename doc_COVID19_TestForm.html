@@ -54,6 +54,7 @@
             }
         </style>
         <script src="js/jquery.js"></script>
+        <script src="js/myTool.js"></script>
         <script>
             $(document).ready(function () { //页面加载完后调用
                 displayDate();
@@ -61,14 +62,7 @@
             function displayDate() { //显示采样时间
                 var myDateTime = new Date();
                 var myMonth = myDateTime.getMonth() + 1;
-                document.getElementById("samplingTime").value = 
-                myDateTime.getFullYear() + "/" + 
-                myMonth + "/" + 
-                myDateTime.getDate() + " " + 
-                myDateTime.getHours() + ":" + 
-                myDateTime.getMinutes() + ":" + 
-                myDateTime.getSeconds();
-                //console.log(myDateTime);
+                document.getElementById("samplingTime").value = myTool_getThisTime();
             }
             function setIdData() { //填写完身份证后自动识别
                 var buff_IDcard = new String(document.getElementById("idNum").value);
@@ -147,9 +141,9 @@
                         <th style="border-bottom:0px;">
                             <h3>基本信息(<font style="color: rgb(255, 0, 0);">必填</font>)</h3>
                             门诊卡号：<input id="myHospitalIdCard" name="myHospitalIdCard" type="text" maxlength="12"/>
-                            <font style="color: black;">*暂时不支持刷卡自动填写，以后改进</font>
+                            <font style="color: black;font-weight: normal">*暂时不支持刷卡自动填写，以后改进</font>
                             <br/>
-                            &emsp;<font>一</font>姓名：<input id="myName" name="myName" type="text" maxlength="16" />
+                            <font>一一</font>姓名：<input id="myName" name="myName" type="text" maxlength="16" />
                             证件类型：<select id="idType" name="idType" style="width: 300px;" >
                                 <option value="居民身份证">居民身份证</option>
                                 <option value="护照">护照</option>
