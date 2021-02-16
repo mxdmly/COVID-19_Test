@@ -1,29 +1,23 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>测试</title>
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript">
-		$(function () {
-			//动态添加
-			$(".add").on("click", function () {
-				console.log("进来了");
-				$(".info").append('<div class="delete"><h3>单击我来删除我</h3></div>');
-			});
-			//对动态添加的元素添加事件-删除
-			$(".info").on("click", ".delete", function () {
-				console.log("进来了Delete！");
-				$(this).remove();
-			});
-		}); 
-	</script>
+<script src="/js/jquery.js">
+</script>
+<script> 
+$(document).ready(function(){
+  $("button").click(function(){
+    $("#asdsad").animate({left:'250px'});
+  });
+});
+</script> 
 </head>
-
+ 
 <body>
-	<h2 class='add'>单击我添加动态元素</h2>
-	<div class="info"></div>
-</body>
 
+<button>开始动画</button>
+<p>默认情况下，所有 HTML 元素的位置都是静态的，并且无法移动。如需对位置进行操作，记得首先把元素的 CSS position 属性设置为 relative、fixed 或 absolute。</p>
+<div id="asdsad" style="background:#98bf21;height:100px;width:100px;position:absolute;">
+</div>
+
+</body>
 </html>

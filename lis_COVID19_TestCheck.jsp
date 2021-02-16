@@ -39,11 +39,11 @@
 		out.println(e.toString());
 	}
 	*/
-	String temp_str = "[";
+	String temp_str = "";
 	for(int i=0; i < 20; i++){
-		temp_str = temp_str + "{\"ID\":" + i + ",\"isUpload\":\"1\",\"name\":\"张三\",\"idType\":\"441202199702145210\",\"samplingTime\":\"2021/2/15 19:14:50\"},";
+		temp_str = temp_str + "{\"ID\":" + i + ",\"isUpload\":\"1\",\"name\":\"张三\",\"idType\":\"44120219970214521" + i + "\",\"samplingTime\":\"2021/2/15 19:14:50\"},";
 	}
-	temp_str = temp_str.substring(0,temp_str.length() - 1) + "]";
+	temp_str = "[" + temp_str.substring(0,temp_str.length() - 1) + "]";
 	dispaly_str = temp_str;
 %>
 <%= dispaly_str %>

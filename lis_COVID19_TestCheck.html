@@ -10,78 +10,159 @@
 			border: 10px solid rgb(151, 228, 164);
 		}
 		input{
+			z-index: 2;
 			text-align: center;
+		}
+		.right{
+			float: right;
+			margin-left: 5px;
+			width: 100px;
+			padding: 10px;
+		}
+		.left{
+			float: left;
+			margin-right: 5px;
+			margin-top: 10px;
+		}
+		.left2{
+			float: left;
+			margin-right: 5px;
+		}
+		label{
+			font-size: 15px;
+		}
+		b{
+			font-size: 30px;
+			color: coral;
+		}
+		#tips{
+			z-index: 1;
 		}
 	</style>
 	<script src="js/jquery.js"></script>
 	<script src="js/myTool.js"></script>
 	<script>
-		//假如有个json数据在这里
-		var myJson_str = new String("[{\"ID\":\"01\",\"isUpload\":\"1\",\"name\":\"张三\",\"idType\":\"441202199702145210\"},{\"ID\":\"01\",\"isUpload\":\"1\",\"name\":\"李四\",\"idType\":\"441202199702145210\"},{\"ID\":\"01\",\"isUpload\":\"1\",\"name\":\"王五\",\"idType\":\"441202199702145210\"},{\"ID\":\"01\",\"isUpload\":\"1\",\"name\":\"王五\",\"idType\":\"441202199702145210\"},{\"ID\":\"01\",\"isUpload\":\"1\",\"name\":\"王五\",\"idType\":\"441202199702145210\"},{\"ID\":\"01\",\"isUpload\":\"1\",\"name\":\"王五\",\"idType\":\"441202199702145210\"},{\"ID\":\"01\",\"isUpload\":\"1\",\"name\":\"王五\",\"idType\":\"441202199702145210\"},{\"ID\":\"01\",\"isUpload\":\"1\",\"name\":\"王五\",\"idType\":\"441202199702145210\"},{\"ID\":\"01\",\"isUpload\":\"1\",\"name\":\"王五\",\"idType\":\"441202199702145210\"},{\"ID\":\"01\",\"isUpload\":\"1\",\"name\":\"王五\",\"idType\":\"441202199702145210\"},{\"ID\":\"01\",\"isUpload\":\"1\",\"name\":\"王五\",\"idType\":\"441202199702145210\"},{\"ID\":\"01\",\"isUpload\":\"1\",\"name\":\"王五\",\"idType\":\"441202199702145210\"},{\"ID\":\"01\",\"isUpload\":\"1\",\"name\":\"王五\",\"idType\":\"441202199702145210\"},{\"ID\":\"01\",\"isUpload\":\"1\",\"name\":\"王五\",\"idType\":\"441202199702145210\"},{\"ID\":\"01\",\"isUpload\":\"1\",\"name\":\"王五\",\"idType\":\"441202199702145210\"},{\"ID\":\"01\",\"isUpload\":\"1\",\"name\":\"王五\",\"idType\":\"441202199702145210\"},{\"ID\":\"01\",\"isUpload\":\"1\",\"name\":\"王五\",\"idType\":\"441202199702145210\"},{\"ID\":\"01\",\"isUpload\":\"1\",\"name\":\"王五\",\"idType\":\"441202199702145210\"},{\"ID\":\"01\",\"isUpload\":\"1\",\"name\":\"王五\",\"idType\":\"441202199702145210\"},{\"ID\":\"01\",\"isUpload\":\"1\",\"name\":\"王五\",\"idType\":\"441202199702145210\"},{\"ID\":\"01\",\"isUpload\":\"1\",\"name\":\"王五\",\"idType\":\"441202199702145210\"}]");
+		var myCheck_arr = new Array();//检测是否有篡改table
+		var myTableJson_json;//获取SQL传回数据的JSON
+		var myTableMaxItem_i = 10, myThisPage_i = 1;//表格的最大行数，现在的页数
 		$(document).ready(function () {//网页载入后立即执行的函数
 			//$("#myListTable").on(displaySpecialEffects());
 			getList();
 		});
-		function getList() { //获取数据库列表
-			$("#myListTable tr:not(:first)").remove();//删除第一行以外的数据
+		function getList() { //获取数据库列表，也是刷新按钮
             $.ajax({
                 //type:'post',
                 //dataType:'text',
                 url:'lis_COVID19_TestCheck.jsp',
                 //data:$("#peopleInfo").serializeArray(),
-                success:function(result){
-					//result = myJson_str;//jsp会返回一个json字符串
+                success:function(result){//jsp会返回一个json字符串
 					//console.log(result);
-					let myTestJson_json;
-					let isJson_b;
 					try {//如果不是json或为空就会报错
-						myTestJson_json = JSON.parse(result);
-						isJson_b = true;
+						myTableJson_json = JSON.parse(result);
 						$("#allCheck").prop("checked", true);
+						setTableList();
+						sendTips("已刷新!");
 					} catch (e) {
-						isJson_b = false;
 						$("#allCheck").prop("checked", false);
 						$("#myListTable").append("<tr><td>无数据</td></tr>");
-						//console.log(e);
-						//alert("服务器没有数据");
-					}
-					if (isJson_b) {
-						let dispaly_str = "";
-						let jsonLen_i = myTestJson_json.length;
-						//console.log(jsonLen_i);
-						for (let i = 0; i < jsonLen_i; i++) {
-							let itemJson = myTestJson_json[i];
-							if(itemJson.isUpload == "1"){
-								let tempi_i = i + 1;//table的序号，不作实际用途
-								dispaly_str = dispaly_str + "<tr>" + 
-									"<td>" + tempi_i + "</td>" + 
-									"<td><input type=\"checkbox\" checked=\"ture\"/></td>" + 
-									"<td>" + itemJson.name + "</td>" + 
-									"<td>" + itemJson.idType + "</td>" + 
-									"<td>阴性</td>" + 
-									"<td><input type=\"text\" value=\"" + myTool_getThisTime() + "\"/>" + 
-									"<td>" + itemJson.samplingTime + "</td>" + 
-									"<td>" + itemJson.ID + "</td>";
-							}
-							dispaly_str = dispaly_str + "</tr>";
-						}
-						console.log(dispaly_str);
-						$("#myListTable").append(dispaly_str);
-						$("#myListTable tr:not(:first)").off();//移除事件重新绑定，不然会重复绑定越来越卡
-						displaySpecialEffects();
+						console.log(e);
+						sendTips("服务器没有数据");
 					}
                 }
             })
 		}
+		function setTableList() {//设置table显示的内容
+			$("#myListTable tr:not(:first)").remove();//删除第一行以外的数据
+			myCheck_arr.splice(0, myCheck_arr.length);//Array清零
+			let dispaly_str = "";
+			let jsonLen_i = myTableJson_json.length;
+			if (Number(jsonLen_i) + Number(myTableMaxItem_i) <= myTableMaxItem_i * myThisPage_i) {
+				myThisPage_i = jsonLen_i/myTableMaxItem_i;
+				if(myThisPage_i < 1)myThisPage_i = 1;
+			}
+			for (let i = (myThisPage_i-1) * myTableMaxItem_i; i < jsonLen_i; i++) {
+				if(i >= myTableMaxItem_i * myThisPage_i){
+					break;
+				}
+				let itemJson = myTableJson_json[i];
+				if (itemJson.isUpload == "1") {
+					let tempi_i = i + 1;//table的序号，不作实际用途
+					dispaly_str = dispaly_str + "<tr>" +
+						"<td style='display: none;'>" + itemJson.ID + "</td>" +
+						"<td>" + tempi_i + "</td>" +
+						"<td><input type=\"checkbox\" checked=\"ture\"/></td>" +
+						"<td>" + itemJson.name + "</td>" +
+						"<td>" + itemJson.idType + "</td>" +
+						"<td>阴性</td>" +
+						"<td><input type=\"text\" value=\"" + myTool_getThisTime() + "\"/>" +
+						"<td>" + itemJson.samplingTime + "</td>";
+				}
+				dispaly_str = dispaly_str + "</tr>";
+				myCheck_arr.push(String(itemJson.ID));
+			}
+			if(jsonLen_i <= 0){
+				dispaly_str = "<tr><td>无数据</td></tr>";
+				$("#allCheck").prop("checked", false);
+			}else{
+				$("#allCheck").prop("checked", true);
+			}
+			$("#myListTable").append(dispaly_str);
+			$("#page").val(myThisPage_i);
+			$("#myListTable tr:not(:first)").off();//移除事件重新绑定，不然会重复绑定越来越卡
+			displaySpecialEffects();
+		}
+		function setPagePrevious() {//上一页
+			if(myThisPage_i > 1){
+				myThisPage_i--;
+			}
+			setTableList();
+		}
+		function setPageNext() {//下一页
+			if(myThisPage_i * myTableMaxItem_i < myTableJson_json.length){
+				myThisPage_i++;
+			}
+			setTableList();
+		}
+		function setMaxPage() {
+			myTableMaxItem_i = $("#maxPage").val();
+			setTableList();
+		}
 		//获取复选框的值上传
 		//上传的时候需要有SQL server的ID、是否勾选、结果、时间，用json保存和传输
 		function uploadList() {
+			let tempUpload_str = "";
+			let deleteJsonItem_i = (myThisPage_i-1) * myTableMaxItem_i;
 			$("#myListTable tr:not(:first)").each(function () {
-				var ss = $(this).find("td").eq(1).html();
-				var sss = $(this).find("td").eq(5).html();
-				console.log(ss + "  " + sss);
+				let tempIfUpload_str = 1;
+				let tempId_str = $(this).find("td:eq(0)").html();
+				//console.log(tempId_str + "sadasdasd" +myCheck_arr.indexOf(tempId_str) + myCheck_arr);
+				if($(this).find("td:eq(2) input:eq(0)").prop("checked") & myCheck_arr.indexOf(tempId_str) >= 0){
+					tempIfUpload_str = 0;
+					tempUpload_str = tempUpload_str + "{" + 
+					"\"ID\":\"" + $(this).find("td:eq(0)").html() + "\"," + 
+					"\"isUpload\":\"" + tempIfUpload_str + "\"," + 
+					"\"yx\":\"" + $(this).find("td").eq(5).html() + "\"," + 
+					"\"time\":\"" + $($(this).find("td").eq(6).html()).val() + "\"" + 
+					"},";
+					myTableJson_json.splice(deleteJsonItem_i, 1);
+					deleteJsonItem_i--;
+				}
+				deleteJsonItem_i++;
 			})
-			$("#tips").val("成功");
+			if(tempUpload_str.length > 2){//判断是否有有效的数据
+				tempUpload_str = "[" + tempUpload_str.substring(0, tempUpload_str.length - 1) + "]";
+				sendTips("保存成功!");
+			}else{
+				sendTips("无数据!");
+			}
+			console.log(tempUpload_str);
+			setTableList();
+		}
+		function sendTips(params) {//显示提示的动画
+			$("#tips").stop();
+			$("#tips").text(params);
+			$("#tips").animate({opacity:'1.0'},150);
+			$("#tips").animate({opacity:'0.0'},1500);
 		}
 		function displaySpecialEffects() {//给每行添加选中特效，点击效果
 			var tr_se = $("#myListTable tr:not(:first)");
@@ -92,33 +173,33 @@
 				$(this).css("background-color","white");
 			});
 			tr_se.click(function (e) {
-				console.log("str");//记得删除
-				var myCheck = $(this).find("td:eq(1) input:eq(0)");
+				console.log($(e.target).html());//记得删除
+				var myCheck = $(this).find("td:eq(2) input:eq(0)");
 				if($(e.target).html() != ""){//如果点击框框就会返回空白，解决点击框框不勾选或乱勾选的问题
 					myCheck.prop("checked", ! myCheck.prop("checked"));
 				}
 				//跟下面的函数关联
 				var trLen_i = $("#myListTable tr:not(:first)").length;//查找table列数
 				$("#myListTable tr:not(:first)").each(function () {
-					if($(this).find("td:eq(1) input:eq(0)").prop("checked")){
+					if($(this).find("td:eq(2) input:eq(0)").prop("checked")){
 						trLen_i = trLen_i - 1;
 					}
 				})
 				if(trLen_i <= 0){//如果打勾的列数等于总列数就把全选打上勾，反之不打勾
-					$("#myListTable tr:first td:eq(1) input:eq(0)").prop("checked", true);
+					$("#myListTable tr:first td:eq(2) input:eq(0)").prop("checked", true);
 				}else{
-					$("#myListTable tr:first td:eq(1) input:eq(0)").prop("checked", false);
+					$("#myListTable tr:first td:eq(2) input:eq(0)").prop("checked", false);
 				}
 			});
 		}
 		function myAllCheck() {//全选
-			if($("#myListTable tr:first td:eq(1) input:eq(0)").prop("checked")){
+			if($("#myListTable tr:first td:eq(2) input:eq(0)").prop("checked")){
 				$("#myListTable tr:not(:first)").each(function () {
-					$(this).find("td:eq(1) input:eq(0)").prop("checked", true);
+					$(this).find("td:eq(2) input:eq(0)").prop("checked", true);
 				})
 			}else{
 				$("#myListTable tr:not(:first)").each(function () {
-					$(this).find("td:eq(1) input:eq(0)").prop("checked", false);
+					$(this).find("td:eq(2) input:eq(0)").prop("checked", false);
 				})
 			}
 		}
@@ -126,13 +207,20 @@
 </head>
 <body>
 	<div>
-		<div style="margin-top: 10px;margin-bottom:10px;float: right;">
-			<b id="tips"></b>
-			<input type="button" value="结果上报" onclick="uploadList()" style="width: 100px;padding: 10px;"/>
-			<input type="button" value="刷新" onclick="getList()" style="width: 100px; padding: 10px;"/>
+		<div id="myControl" style="overflow: auto;margin-top: 10px;margin-bottom:10px;">
+			<label class="left">姓名:</label><input type="text" class="left" style="height: 15px;width: 80px;"/>
+			<label class="left">&emsp;检测时间:</label>
+			<input type="text" class="left" style="height: 15px;width: 80px;"/>
+			<label class="left">-</label>
+			<input type="text" class="left" style="height: 15px;width: 80px;"/>
+			<input type="button" value="查询" class="left" style="margin-top: 9px;"/>
+			<input type="button" value="刷新" onclick="getList()" class="right" />
+			<input type="button" value="结果上报" onclick="uploadList()" class="right" />
+			<b id="tips" style="opacity: 0;width: 140px;float: right;">保存成功!</b>
 		</div>
-		<table id="myListTable" data-="">
+		<table id="myListTable" >
 			<tr style="background-color: rgb(129, 230, 191);">
+				<td style="display: none;">SqlID</td>
 				<td>序号</td>
 				<td>是否上报<br><label for="allCheck" style="font-size: 10px;">（全选<input type="checkbox" id="allCheck" onclick="myAllCheck()" checked="ture" style="width: 10px;vertical-align: -10%;" />）</label></td>
 				<td>姓名</td>
@@ -142,10 +230,15 @@
 				<td>采样时间</td>
 			</tr>
 		</table>
-		<div style="margin-top: 10px;float: left;">
-			<input type="button" value="前一页" id="turnLeft" onclick="" style="height:25px;"/>
-			<input type="text" value="1" id="page" style="width:19px;height:19px;text-align:center;"/>
-			<input type="button" value="后一页" id="turnRight" onclick="" style="height:25px;"/>
+		<div style="margin-top: 10px;">
+			<input type="button" value="前一页" id="turnLeft" onclick="setPagePrevious()" class="left2"/>
+			<input type="text" value="1" id="page" class="left2" style="width:17px;height: 17px;"/>
+			<input type="button" value="后一页" id="turnRight" onclick="setPageNext()" class="left2"/>
+			<label class="left2" style="margin-top: 1px;">&emsp;&emsp;每页显示</label>
+			<input type="text" value="10" id="maxPage" class="left2" style="width:17px;height: 17px;border:none;border-bottom:black solid 1px;
+			background:transparent;" />
+			<label class="left2" style="margin-top: 1px;">条数据</label>
+			<input type="button" value="确认" id="setMaxPage" onclick="setMaxPage()" class="left2"/>
 		</div>
 	</div>
 </body>
