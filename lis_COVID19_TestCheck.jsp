@@ -4,33 +4,35 @@
 <%@ page import="java.util.regex.*, java.text.SimpleDateFormat, java.util.Date" %>
 
 <%! 
-	String name_str, isUpload_str, idType_str;
-	String dispaly_str;//显示在html页面，由jsp生成的表格
+	String id_str, name_str, isUpload_str, idType_str, samplingTime;
+	String dispaly_str;//显示在html页面，由jsp生成
 %>
 <%
-	/*
+/*
 	String sql_str = "";//sql插入语句
 	try{
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		Connection connection = DriverManager.getConnection("jdbc:sqlserver://198.8.8.7:1433;DatabaseName=nhis", "sa", "sa123!@#");
-		sql_str = "SELECT dbo._COVID19test.name, dbo._COVID19test.isUpload, dbo._COVID19test.idType, dbo._COVID19test.testResult, dbo._COVID19test.testTime FROM dbo._COVID19test";
+		sql_str = "SELECT ID, name, isUpload, idType, testResult, testTime FROM dbo._COVID19test";
 
 		Statement stmt = connection.createStatement();
 		ResultSet rs = stmt.executeQuery(sql_str);
-		int i = 1;
+		dispaly_str = "";
 		while(rs.next()){
+			id_str = rs.getString("ID");
 			name_str = rs.getString("name");//姓名
 			isUpload_str = rs.getString("isUpload");//上报状态
 			idType_str = rs.getString("idType");//身份证
-			dispaly_str = "<tr><td>" + i + "</td>" + 
-			"<td><input type=\"checkbox\" checked=\"ture\"/></td>" + 
-			"<td>" + name_str + "</td>" + 
-			"<td>" + isUpload_str + "</td>" + 
-			"<td>" + idType_str + "</td>" + 
-			"<td>阴性</td>" + 
-			"<td><input type=\"text\" value=\"" + new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()) + "\"/></td></tr>";
-			i++;
+			samplingTime =  rs.getString("testTime");//日期
+			dispaly_str = dispaly_str + "{" + 
+				"\"ID\":\"" + id_str + "\"," + 
+				"\"isUpload\":\"" + isUpload_str + "\"," + 
+				"\"name\":\"" + name_str + "\"," + 
+				"\"idType\":\"" + idType_str + "\"," + 
+				"\"samplingTime\":\"" + new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").parse(samplingTime)) + "\"" + 
+				"},";
 		}
+		dispaly_str = "[" + dispaly_str.substring(0,dispaly_str.length() - 1) + "]";
 		rs.close();
 		stmt.close();
 		connection.close();
@@ -40,7 +42,7 @@
 	}
 	*/
 	String temp_str = "";
-	for(int i=0; i < 20; i++){
+	for(int i=0; i < 5; i++){
 		temp_str = temp_str + "{\"ID\":" + i + ",\"isUpload\":\"1\",\"name\":\"张三\",\"idType\":\"44120219970214521" + i + "\",\"samplingTime\":\"2021/2/15 19:14:50\"},";
 	}
 	temp_str = "[" + temp_str.substring(0,temp_str.length() - 1) + "]";
