@@ -73,20 +73,21 @@
             })
 		}
 		function setTableList() {//设置table显示的内容
+			$("#myListTable tr:not(:first)").remove();//删除第一行以外的数据
 			myCheck_arr.splice(0, myCheck_arr.length);//Array清零
-			let dispaly_str = "";
-			let jsonLen_i = myTableJson_json.length;
+			var dispaly_str = "";
+			var jsonLen_i = myTableJson_json.length;
 			if (Number(jsonLen_i) + Number(myTableMaxItem_i) <= myTableMaxItem_i * myThisPage_i) {
 				myThisPage_i = jsonLen_i/myTableMaxItem_i;
 				if(myThisPage_i < 1)myThisPage_i = 1;
 			}
-			for (let i = (myThisPage_i-1) * myTableMaxItem_i; i < jsonLen_i; i++) {
+			for (var i = (myThisPage_i-1) * myTableMaxItem_i; i < jsonLen_i; i++) {
 				if(i >= myTableMaxItem_i * myThisPage_i){
 					break;
 				}
-				let itemJson = myTableJson_json[i];
+				var itemJson = myTableJson_json[i];
 				if (itemJson.isUpload == "1" || 1==1) {
-					let tempi_i = i + 1;//table的序号，不作实际用途
+					var tempi_i = i + 1;//table的序号，不作实际用途
 					dispaly_str = dispaly_str + "<tr>" +
 						"<td style='display: none;'>" + itemJson.ID + "</td>" +
 						"<td>" + tempi_i + "</td>" +
@@ -130,11 +131,11 @@
 		//获取复选框的值上传
 		//上传的时候需要有SQL server的ID、是否勾选、结果、时间，用json保存和传输
 		function uploadList() {
-			let tempUpload_str = "";
-			let deleteJsonItem_i = (myThisPage_i-1) * myTableMaxItem_i;
+			var tempUpload_str = "";
+			var deleteJsonItem_i = (myThisPage_i-1) * myTableMaxItem_i;
 			$("#myListTable tr:not(:first)").each(function () {
-				let tempIfUpload_str = 1;
-				let tempId_str = $(this).find("td:eq(0)").html();
+				var tempIfUpload_str = 1;
+				var tempId_str = $(this).find("td:eq(0)").html();
 				//console.log(tempId_str + "sadasdasd" +myCheck_arr.indexOf(tempId_str) + myCheck_arr);
 				if($(this).find("td:eq(2) input:eq(0)").prop("checked") & myCheck_arr.indexOf(tempId_str) >= 0){
 					tempIfUpload_str = 0;

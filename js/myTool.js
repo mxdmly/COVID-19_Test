@@ -4,11 +4,11 @@
 function myTool_getThisTime() {
     var myDateTime = new Date();
     var myMonth = myDateTime.getMonth() + 1;
-    let tempSec = myDateTime.getSeconds()
+    var tempSec = myDateTime.getSeconds()
     if(tempSec < 10){
         tempSec = "0" + tempSec;
     }
-    let thisTime_str = myDateTime.getFullYear() + "/" + 
+    var thisTime_str = myDateTime.getFullYear() + "/" + 
     myMonth + "/" + 
     myDateTime.getDate() + " " + 
     myDateTime.getHours() + ":" + 

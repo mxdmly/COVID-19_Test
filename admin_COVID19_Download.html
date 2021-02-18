@@ -7,7 +7,7 @@
 			text-align: center;
 			margin: 0;
 			width: 100%;
-			border: 10px solid rgb(151, 228, 164);
+			border: 10px solid rgb(230, 228, 167);
 		}
 		input{
 			z-index: 2;
@@ -41,9 +41,10 @@
 	</style>
 	<script src="js/jquery.js"></script>
 	<script src="js/myTool.js"></script>
+	<script src="js/jquery.table2excel.js"></script>
 	<script>
 		var myCheck_arr = new Array();//检测是否有篡改table
-		var myTableJson_json;//获取SQL传回数据的JSON
+		var myTableJson_json = "";//获取SQL传回数据的JSON
 		var myTableMaxItem_i = 10, myThisPage_i = 1;//表格的最大行数，现在的页数
 		$(document).ready(function () {//网页载入后立即执行的函数
 			//$("#myListTable").on(displaySpecialEffects());
@@ -60,11 +61,11 @@
 					//console.log(result);
 					try {//如果不是json或为空就会报错
 						myTableJson_json = JSON.parse(result);
-						$("#allCheck").prop("checked", true);
+						//$("#allCheck").prop("checked", true);
 						setTableList();
 						sendTips("已刷新!");
 					} catch (e) {
-						$("#allCheck").prop("checked", false);
+						//$("#allCheck").prop("checked", false);
 						$("#myListTable").append("<tr><td>无数据</td></tr>");
 						console.log(e);
 						sendTips("没有数据");
@@ -74,19 +75,19 @@
 		}
 		function setTableList() {//设置table显示的内容
 			myCheck_arr.splice(0, myCheck_arr.length);//Array清零
-			let dispaly_str = "";
-			let jsonLen_i = myTableJson_json.length;
+			var dispaly_str = "";
+			var jsonLen_i = myTableJson_json.length();
 			if (Number(jsonLen_i) + Number(myTableMaxItem_i) <= myTableMaxItem_i * myThisPage_i) {
 				myThisPage_i = jsonLen_i/myTableMaxItem_i;
 				if(myThisPage_i < 1)myThisPage_i = 1;
 			}
-			for (let i = (myThisPage_i-1) * myTableMaxItem_i; i < jsonLen_i; i++) {
+			for (var i = (myThisPage_i-1) * myTableMaxItem_i; i < jsonLen_i; i++) {
 				if(i >= myTableMaxItem_i * myThisPage_i){
 					break;
 				}
-				let itemJson = myTableJson_json[i];
+				var itemJson = myTableJson_json[i];
 				if (itemJson.isUpload == "1" || 1==1) {
-					let tempi_i = i + 1;//table的序号，不作实际用途
+					var tempi_i = i + 1;//table的序号，不作实际用途
 					dispaly_str = dispaly_str + "<tr>" +
 						"<td style='display: none;'>" + itemJson.ID + "</td>" +
 						"<td>" + tempi_i + "</td>" +
@@ -102,9 +103,9 @@
 			}
 			if(jsonLen_i <= 0){
 				dispaly_str = "<tr><td>无数据</td></tr>";
-				$("#allCheck").prop("checked", false);
+				//$("#allCheck").prop("checked", false);
 			}else{
-				$("#allCheck").prop("checked", true);
+				//$("#allCheck").prop("checked", true);
 			}
 			$("#myListTable").append(dispaly_str);
 			$("#page").val(myThisPage_i);
@@ -129,34 +130,23 @@
 		}
 		//获取复选框的值上传
 		//上传的时候需要有SQL server的ID、是否勾选、结果、时间，用json保存和传输
-		function uploadList() {
-			let tempUpload_str = "";
-			let deleteJsonItem_i = (myThisPage_i-1) * myTableMaxItem_i;
-			$("#myListTable tr:not(:first)").each(function () {
-				let tempIfUpload_str = 1;
-				let tempId_str = $(this).find("td:eq(0)").html();
-				//console.log(tempId_str + "sadasdasd" +myCheck_arr.indexOf(tempId_str) + myCheck_arr);
-				if($(this).find("td:eq(2) input:eq(0)").prop("checked") & myCheck_arr.indexOf(tempId_str) >= 0){
-					tempIfUpload_str = 0;
-					tempUpload_str = tempUpload_str + "{" + 
-					"\"ID\":\"" + $(this).find("td:eq(0)").html() + "\"," + 
-					"\"isUpload\":\"" + tempIfUpload_str + "\"," + 
-					"\"yx\":\"" + $(this).find("td").eq(5).html() + "\"," + 
-					"\"time\":\"" + $($(this).find("td").eq(6).html()).val() + "\"" + 
-					"},";
-					myTableJson_json.splice(deleteJsonItem_i, 1);
-					deleteJsonItem_i--;
-				}
-				deleteJsonItem_i++;
-			})
-			if(tempUpload_str.length > 2){//判断是否有有效的数据
-				tempUpload_str = "[" + tempUpload_str.substring(0, tempUpload_str.length - 1) + "]";
-				sendTips("保存成功!");
-			}else{
-				sendTips("无数据!");
-			}
-			console.log(tempUpload_str);
-			setTableList();
+		function downloadListForExcel() {
+			$("#myListTable").table2excel({
+				// 不被导出的表格行的CSS class类
+				exclude: ".noExl",
+				// 导出的Excel文档的名称
+				name: "Excel Document Name",
+				// Excel文件的名称
+				filename: "test",
+				//文件后缀名
+				fileext: ".xls",
+				//是否排除导出图片
+				exclude_img: false,
+				//是否排除导出超链接
+				exclude_links: false,
+				//是否排除导出输入框中的内容
+				exclude_inputs: false
+			});
 		}
 		function sendTips(params) {//显示提示的动画
 			$("#tips").stop();
@@ -172,6 +162,7 @@
 			tr_se.mouseout(function () {
 				$(this).css("background-color","white");
 			});
+			/*
 			tr_se.click(function (e) {
 				console.log($(e.target).html());//记得删除
 				var myCheck = $(this).find("td:eq(2) input:eq(0)");
@@ -190,8 +181,9 @@
 				}else{
 					$("#myListTable tr:first td:eq(2) input:eq(0)").prop("checked", false);
 				}
-			});
+			});*/
 		}
+		/*
 		function myAllCheck() {//全选
 			if($("#myListTable tr:first td:eq(2) input:eq(0)").prop("checked")){
 				$("#myListTable tr:not(:first)").each(function () {
@@ -202,7 +194,7 @@
 					$(this).find("td:eq(2) input:eq(0)").prop("checked", false);
 				})
 			}
-		}
+		}*/
 	</script>
 </head>
 <body>
@@ -215,14 +207,14 @@
 			<input type="text" class="left" style="height: 15px;width: 80px;"/>
 			<input type="button" value="查询" class="left" style="margin-top: 9px;"/>
 			<input type="button" value="刷新" onclick="getList()" class="right" />
-			<input type="button" value="结果上报" onclick="uploadList()" class="right" />
+			<input type="button" value="结果下载" onclick="downloadListForExcel()" class="right" />
 			<b id="tips" style="opacity: 0;width: 140px;float: right;">保存成功!</b>
 		</div>
 		<table id="myListTable" >
-			<tr style="background-color: rgb(129, 230, 191);">
+			<tr style="background-color: rgb(228, 220, 108);height: 44px;">
 				<td style="display: none;">SqlID</td>
 				<td>序号</td>
-				<td>是否上报<br><label for="allCheck" style="font-size: 10px;">（全选<input type="checkbox" id="allCheck" onclick="myAllCheck()" checked="ture" style="width: 10px;vertical-align: -10%;" />）</label></td>
+				<td>是否上报</td>
 				<td>姓名</td>
 				<td>身份证</td>
 				<td>检测结果</td>
@@ -243,33 +235,3 @@
 	</div>
 </body>
 </html>
-
-
-
-
-			<!--
-			<tr>
-				<td>1</td>
-				<td><input type="checkbox" checked="ture" /></td>
-				<td>张三</td>
-				<td>441202199702145210</td>
-				<td>阴性</td>
-				<td><input type="text" value="2021/1/01 12:00:00"/></td>
-			</tr>
-			<tr>
-				<td>2</td>
-				<td><input type="checkbox" checked="ture" /></td>
-				<td>李四</td>
-				<td>441202199702145210</td>
-				<td>阴性</td>
-				<td><input type="text" value="2021/1/01 12:00:00"/></td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td><input type="checkbox" checked="ture"/></td>
-				<td>王五</td>
-				<td>441202199702145210</td>
-				<td>阴性</td>
-				<td><input type="text" value="2021/1/01 12:00:00"/></td>
-			</tr>
-		-->

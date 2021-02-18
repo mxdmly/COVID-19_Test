@@ -6,17 +6,19 @@
 
 <%! 
 	//SQL安全防护的正则表达式
-	String CHECKSQL = "\\*|\\.|;|=|%|or|and|if|end|go|exec|insert|select|delete|update|count|chr|mid|master|truncate|char|declare";
+	//String CHECKSQL = "\\*|\\.|;|=|%|or|and|if|end|go|exec|insert|select|delete|update|count|chr|mid|master|truncate|char|declare";
 	String id_str, name_str, isUpload_str, idType_str, samplingTime;
 	String dispaly_str;//显示在html页面，由jsp生成
 %>
 <%
+	/*
 	boolean sqlCheck_b = true;
 	Pattern r = Pattern.compile(CHECKSQL);
 	Matcher m = r.matcher("targerStr");
 	sqlCheck_b = m.find();//使用find函数才能对任意字符串匹配
 	int result_i = -1;//sql返回值
 	String sql_str = "";//sql插入语句
+	*/
 	try{
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		Connection connection = DriverManager.getConnection("jdbc:sqlserver://198.8.8.7:1433;DatabaseName=nhis", "sa", "sa123!@#");
