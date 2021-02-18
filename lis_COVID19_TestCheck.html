@@ -50,6 +50,7 @@
 			getList();
 		});
 		function getList() { //获取数据库列表，也是刷新按钮
+			$("#myListTable tr:not(:first)").remove();//删除第一行以外的数据
             $.ajax({
                 //type:'post',
                 //dataType:'text',
@@ -66,13 +67,12 @@
 						$("#allCheck").prop("checked", false);
 						$("#myListTable").append("<tr><td>无数据</td></tr>");
 						console.log(e);
-						sendTips("服务器没有数据");
+						sendTips("没有数据");
 					}
                 }
             })
 		}
 		function setTableList() {//设置table显示的内容
-			$("#myListTable tr:not(:first)").remove();//删除第一行以外的数据
 			myCheck_arr.splice(0, myCheck_arr.length);//Array清零
 			let dispaly_str = "";
 			let jsonLen_i = myTableJson_json.length;
