@@ -24,6 +24,9 @@ hs_err_pid*
 
 # 忽略jQuery库
 /js/jquery.js
+/js/react-dom.js
+/js/react.js
+/js/babel.min.js
 
 # 忽略img图片文件夹
 /img/*

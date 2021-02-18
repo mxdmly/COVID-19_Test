@@ -12,8 +12,6 @@
     <%!
         //SQL安全防护的正则表达式
         String CHECKSQL = "\\*|\\.|;|=|%|or|and|if|end|go|exec|insert|select|delete|update|count|chr|mid|master|truncate|char|declare";
-        //SQL保留字
-        static String RESERVEDWORD = "'|and|exec|insert|select|delete|update|count|*|%|chr|mid|master|truncate|char|declare|;|or|-|+|,";
         String sqlNonNullFormat(String str){ //sql非空判断以及格式化
             if(str == "" | str == null){
                 str = "null,";
@@ -24,7 +22,6 @@
         }
     %>
     <%
-    /*
         //必填
         String myHospitalIdCard_str = request.getParameter("myHospitalIdCard");
         String myName_str = request.getParameter("myName");
@@ -102,7 +99,6 @@
             }
         }
         out.println(result_i + "    " + sql_str);
-    */
     %>
     <%= sqlCheck_b %>
 </body>

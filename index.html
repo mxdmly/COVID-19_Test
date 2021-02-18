@@ -69,10 +69,10 @@
 	$(function () { //标题下拉的隐藏与显示
 		$("li").mouseover(function () {
 			$(this).children("div").show();
-		})
+		});
 		$("li").mouseout(function () {
 			$(this).children("div").hide();
-		})
+		});
 	})
 	//使用div作为超链接，ajax技术更新网页模块而不影响nav标题和其他元素
 	//loadIndexHtml(网页链接，更新的模块高度)
@@ -91,10 +91,13 @@
 		var myImgHight;
 		$("img/yqfx.jpg").load(function(){
 			myImgHight = this.height;
-		})
+		});
 		document.getElementById("myIframe").style.height = myImgHight;
 		$("#myIframe").load(newHtmlUrl);
 	}
+	$(document).ready(function () {
+		$("#myIframe").load("/hello.jsp");
+	})
 </script>
 </head>
 <body>
@@ -187,7 +190,9 @@
 	</ul>
 </nav>
 </div>
-<div id="myIframe" name="myIframe" class="myIframe" ></div>
+<div id="myIframe" name="myIframe" class="myIframe" >
+	<h1>后台服务器链接失败，请联系信息科</h1>
+</div>
 <div align="center" style="background-color:#4267ac;color:#FFF;font-size:12px;font-variant:small-caps;height:50px;padding-top:25px;">
     8080 <a onclick="loadIndexHtml('./about.html', '800px')">关于我们</a>&nbsp;<a onclick="loadIndexHtml('/hello.jsp', '600px')">测试网页</a>&nbsp;<img src="/img/tel.png" width="12" height="12"/>2293025&nbsp;<img src="/img/tel.png" width="12" height="12"/>2293022 工作时间 周一至周五8:00-11:30或12:30-17:30
     <br>

@@ -10,6 +10,6 @@
 <%
 System.out.println("hello");
 %>
-it work
+<h1>服务器已链接，通讯正常</h1>
 </body>
 </html>
