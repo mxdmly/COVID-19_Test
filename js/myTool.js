@@ -1,5 +1,11 @@
 //自定义的工具类js，方便自己调用各种常见的数据，且jq没有提供更好的方法。
 
+//解决IE8兼容问题
+window.console = window.console || (function () {
+    var c = {}; c.log = c.warn = c.debug = c.info = c.error = c.time = c.dir = c.profile
+        = c.clear = c.exception = c.trace = c.assert = function () { };
+    return c;
+})();
 //获取当前时间 格式yyyy-MM-dd hh:mm:ss
 function myTool_getThisTime() {
     var myDateTime = new Date();

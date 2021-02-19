@@ -8,7 +8,7 @@
 </head>
 <body>
 <%
-System.out.println("hello");
+//out.println("hello");
 %>
 <h1>服务器已链接，通讯正常</h1>
 </body>

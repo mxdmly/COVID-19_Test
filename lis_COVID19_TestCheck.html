@@ -52,8 +52,8 @@
 		function getList() { //获取数据库列表，也是刷新按钮
 			$("#myListTable tr:not(:first)").remove();//删除第一行以外的数据
             $.ajax({
-                //type:'post',
-                //dataType:'text',
+                type:'post',
+                dataType:'text',
                 url:'lis_COVID19_TestCheck.jsp',
                 //data:$("#peopleInfo").serializeArray(),
                 success:function(result){//jsp会返回一个json字符串
@@ -124,17 +124,17 @@
 			}
 			setTableList();
 		}
-		function setMaxPage() {
+		function setMaxPage() {//每页显示的行数
 			myTableMaxItem_i = $("#maxPage").val();
 			setTableList();
 		}
 		//获取复选框的值上传
 		//上传的时候需要有SQL server的ID、是否勾选、结果、时间，用json保存和传输
-		function uploadList() {
+		function sendList() {
 			var tempUpload_str = "";
 			var deleteJsonItem_i = (myThisPage_i-1) * myTableMaxItem_i;
 			$("#myListTable tr:not(:first)").each(function () {
-				var tempIfUpload_str = 1;
+				var tempIfUpload_str = 0;
 				var tempId_str = $(this).find("td:eq(0)").html();
 				//console.log(tempId_str + "sadasdasd" +myCheck_arr.indexOf(tempId_str) + myCheck_arr);
 				if($(this).find("td:eq(2) input:eq(0)").prop("checked") & myCheck_arr.indexOf(tempId_str) >= 0){
@@ -142,8 +142,8 @@
 					tempUpload_str = tempUpload_str + "{" + 
 					"\"ID\":\"" + $(this).find("td:eq(0)").html() + "\"," + 
 					"\"isUpload\":\"" + tempIfUpload_str + "\"," + 
-					"\"yx\":\"" + $(this).find("td").eq(5).html() + "\"," + 
-					"\"time\":\"" + $($(this).find("td").eq(6).html()).val() + "\"" + 
+					"\"testResult\":\"" + $(this).find("td").eq(5).html() + "\"," + 
+					"\"testTime\":\"" + $($(this).find("td").eq(6).html()).val() + "\"" + 
 					"},";
 					myTableJson_json.splice(deleteJsonItem_i, 1);
 					deleteJsonItem_i--;
@@ -152,7 +152,17 @@
 			})
 			if(tempUpload_str.length > 2){//判断是否有有效的数据
 				tempUpload_str = "[" + tempUpload_str.substring(0, tempUpload_str.length - 1) + "]";
-				sendTips("保存成功!");
+				$.ajax({
+					type:'post',
+					dataType:'text',
+					url:'lis_COVID19_TestCheckUp.jsp',
+					data:{
+						"data":tempUpload_str
+					},
+					success:function(){
+						sendTips("保存成功!");
+					}
+				});
 			}else{
 				sendTips("无数据!");
 			}
@@ -216,7 +226,7 @@
 			<input type="text" class="left" style="height: 15px;width: 80px;"/>
 			<input type="button" value="查询" class="left" style="margin-top: 9px;"/>
 			<input type="button" value="刷新" onclick="getList()" class="right" />
-			<input type="button" value="结果上报" onclick="uploadList()" class="right" />
+			<input type="button" value="结果上报" onclick="sendList()" class="right" />
 			<b id="tips" style="opacity: 0;width: 140px;float: right;">保存成功!</b>
 		</div>
 		<table id="myListTable" >
@@ -257,20 +267,4 @@
 				<td>阴性</td>
 				<td><input type="text" value="2021/1/01 12:00:00"/></td>
 			</tr>
-			<tr>
-				<td>2</td>
-				<td><input type="checkbox" checked="ture" /></td>
-				<td>李四</td>
-				<td>441202199702145210</td>
-				<td>阴性</td>
-				<td><input type="text" value="2021/1/01 12:00:00"/></td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td><input type="checkbox" checked="ture"/></td>
-				<td>王五</td>
-				<td>441202199702145210</td>
-				<td>阴性</td>
-				<td><input type="text" value="2021/1/01 12:00:00"/></td>
-			</tr>
-		-->
+			-->

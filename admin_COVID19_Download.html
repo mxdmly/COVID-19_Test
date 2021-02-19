@@ -60,6 +60,7 @@
                 success:function(result){//jsp会返回一个json字符串
 					//console.log(result);
 					try {//如果不是json或为空就会报错
+						alert("asdasd");
 						myTableJson_json = JSON.parse(result);
 						//$("#allCheck").prop("checked", true);
 						setTableList();
