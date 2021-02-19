@@ -43,7 +43,7 @@
 	<script src="js/myTool.js"></script>
 	<script>
 		var myCheck_arr = new Array();//检测是否有篡改table
-		var myTableJson_json;//获取SQL传回数据的JSON
+		var myTableJson_json = "";//获取SQL传回数据的JSON
 		var myTableMaxItem_i = 10, myThisPage_i = 1;//表格的最大行数，现在的页数
 		$(document).ready(function () {//网页载入后立即执行的函数
 			//$("#myListTable").on(displaySpecialEffects());
@@ -115,14 +115,14 @@
 		function setPagePrevious() {//上一页
 			if(myThisPage_i > 1){
 				myThisPage_i--;
+				setTableList();
 			}
-			setTableList();
 		}
 		function setPageNext() {//下一页
 			if(myThisPage_i * myTableMaxItem_i < myTableJson_json.length){
 				myThisPage_i++;
+				setTableList();
 			}
-			setTableList();
 		}
 		function setMaxPage() {//每页显示的行数
 			myTableMaxItem_i = $("#maxPage").val();

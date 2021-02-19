@@ -37,7 +37,7 @@
         out.println("发现SQL注入");
     }else{
         out.println(getJsonData_str);
-        //getJsonData_str = "{ID: \"58\", isUpload: \"0\", name: \"null\", idType: \"居民身份证\", samplingTime: \"2021/02/19 12:33:42\"}";
+        //getJsonData_str = "[{\"ID\": \"58\", "isUpload": \"0\", \"name\": \"null\", \"idType\": \"居民身份证\", \"samplingTime\": \"2021/02/19 12:33:42\"}]";
         //getJsonData_json = JSON.parseObject(getJsonData_str, Person.Class);
         //out.println(getJsonData_json);
         /*
