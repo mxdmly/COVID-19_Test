@@ -7,62 +7,8 @@
 <%! 
 	//SQL安全防护的正则表达式
 	//String CHECKSQL = "\\*|\\.|;|=|%|or|and|if|end|go|exec|insert|select|delete|update|count|chr|mid|master|truncate|char|declare";
-	String id_str, name_str, isUpload_str, idNum_str, samplingTime;
+	String id_str, name_str, isUpload_str, idNum_str, samplingTime, testTime;
 	String dispaly_str;//显示在html页面，由jsp生成
-	/*
-	String getJsonData_str = "[{\"ID\": \"58\", \"isUpload\": \"0\", \"name\": \"null\", \"idNum\": \"居民身份证\", \"samplingTime\": \"2021/02/19 12:33:42\"}]";
-	public class myJson{
-		String myJson_str = getJsonData_str;
-		public myJson(String myJson_str){
-			this.myJson_str = myJson_str;
-		}
-		ArrayList getJson(){
-			Pattern r;
-			Matcher m;
-			ArrayList<HashMap<String, String>> myArrayList = new ArrayList();
-			HashMap<String, String> myHash_hm = new HashMap();
-			for(int i=0; i <= myJson_str.length(); i++){
-				int tempStart_i, tempStop_i;
-				//开始的下标
-				r = Pattern.compile("{");
-				m = r.matcher(myJson_str);
-				tempStart_i = m.start();
-				//结束的下标，同样用start
-				r = Pattern.compile("}");
-				m = r.matcher(myJson_str);
-				tempStop_i = m.start();
-				//截取
-				String buff_str = myJson_str.substring(tempStart_i, tempStop_i);
-				myJson_str = myJson_str.substring(tempStop_i, myJson_str.length());
-				while(buff_str.length() >= 0){
-					myHash_hm.clear();
-					String key_str, value_str;
-					//key
-					r = Pattern.compile("\"");
-					m = r.matcher(buff_str);
-					tempStart_i = m.start();
-					r = Pattern.compile("\":");
-					m = r.matcher(buff_str);
-					tempStop_i = m.start();
-					key_str = buff_str.substring(tempStart_i, tempStop_i);
-					//value
-					r = Pattern.compile("\"");
-					m = r.matcher(buff_str);
-					tempStart_i = m.start();
-					buff_str = buff_str.substring(tempStart_i, myJson_str.length());
-					r = Pattern.compile("\"");
-					m = r.matcher(buff_str);
-					tempStop_i = m.start();
-					value_str = buff_str.substring(tempStart_i, tempStop_i);
-					buff_str = buff_str.substring(tempStop_i, myJson_str.length());
-					myHash_hm.put(key_str, value_str);
-				}
-				myArrayList.add(i, myHash_hm);
-			}
-			return myArrayList;
-		}
-	}
-	*/
 %>
 <%
 	/*********
@@ -82,7 +28,7 @@
 	try{
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		Connection connection = DriverManager.getConnection("jdbc:sqlserver://198.8.8.7:1433;DatabaseName=nhis", "sa", "sa123!@#");
-		String sql_str = "SELECT ID, name, isUpload, idNum, testResult, samplingTime FROM dbo._COVID19test WHERE isUpload = 0";
+		String sql_str = "SELECT ID, name, isUpload, idNum, testResult, samplingTime, testTime FROM dbo._COVID19test WHERE isUpload = 1";
 
 		Statement stmt = connection.createStatement();
 		ResultSet rs = stmt.executeQuery(sql_str);
@@ -93,13 +39,15 @@
 				name_str = rs.getString("name");//姓名
 				isUpload_str = rs.getString("isUpload");//上报状态
 				idNum_str = rs.getString("idNum");//身份证
-				samplingTime =  rs.getString("samplingTime");//日期
+				samplingTime =  rs.getString("samplingTime");//采样日期
+				testTime =  rs.getString("testTime");//采样日期
 				dispaly_str = dispaly_str + "{" + 
 					"\"ID\":\"" + id_str + "\"," + 
 					"\"isUpload\":\"" + isUpload_str + "\"," + 
 					"\"name\":\"" + name_str + "\"," + 
 					"\"idNum\":\"" + idNum_str + "\"," + 
-					"\"samplingTime\":\"" + new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").parse(samplingTime)) + "\"" + 
+					"\"samplingTime\":\"" + samplingTime + "\"," + 
+					"\"testTime\":\"" + testTime + "\"" + 
 					"},";
 			}
 		}

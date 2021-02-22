@@ -86,14 +86,14 @@
 					break;
 				}
 				var itemJson = myTableJson_json[i];
-				if (itemJson.isUpload == "1" || 1==1) {
+				if (itemJson.isUpload == "0") {
 					var tempi_i = i + 1;//table的序号，不作实际用途
 					dispaly_str = dispaly_str + "<tr>" +
 						"<td style='display: none;'>" + itemJson.ID + "</td>" +
 						"<td>" + tempi_i + "</td>" +
 						"<td><input type=\"checkbox\" checked=\"ture\"/></td>" +
 						"<td>" + itemJson.name + "</td>" +
-						"<td>" + itemJson.idType + "</td>" +
+						"<td>" + itemJson.idNum + "</td>" +
 						"<td>阴性</td>" +
 						"<td><input type=\"text\" value=\"" + myTool_getThisTime() + "\"/>" +
 						"<td>" + itemJson.samplingTime + "</td>";
@@ -138,7 +138,7 @@
 				var tempId_str = $(this).find("td:eq(0)").html();
 				//console.log(tempId_str + "sadasdasd" +myCheck_arr.indexOf(tempId_str) + myCheck_arr);
 				if($(this).find("td:eq(2) input:eq(0)").prop("checked") & myCheck_arr.indexOf(tempId_str) >= 0){
-					tempIfUpload_str = 0;
+					tempIfUpload_str = 1;
 					tempUpload_str = tempUpload_str + "{" + 
 					"\"ID\":\"" + $(this).find("td:eq(0)").html() + "\"," + 
 					"\"isUpload\":\"" + tempIfUpload_str + "\"," + 

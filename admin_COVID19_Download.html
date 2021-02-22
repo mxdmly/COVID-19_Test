@@ -55,12 +55,11 @@
             $.ajax({
                 //type:'post',
                 //dataType:'text',
-                url:'lis_COVID19_TestCheck.jsp',
+                url:'admin_COVID19_Download.jsp',
                 //data:$("#peopleInfo").serializeArray(),
                 success:function(result){//jsp会返回一个json字符串
 					//console.log(result);
 					try {//如果不是json或为空就会报错
-						alert("asdasd");
 						myTableJson_json = JSON.parse(result);
 						//$("#allCheck").prop("checked", true);
 						setTableList();
@@ -75,9 +74,10 @@
             })
 		}
 		function setTableList() {//设置table显示的内容
+			$("#myListTable tr:not(:first)").remove();//删除第一行以外的数据
 			myCheck_arr.splice(0, myCheck_arr.length);//Array清零
 			var dispaly_str = "";
-			var jsonLen_i = myTableJson_json.length();
+			var jsonLen_i = myTableJson_json.length;
 			if (Number(jsonLen_i) + Number(myTableMaxItem_i) <= myTableMaxItem_i * myThisPage_i) {
 				myThisPage_i = jsonLen_i/myTableMaxItem_i;
 				if(myThisPage_i < 1)myThisPage_i = 1;
@@ -87,16 +87,16 @@
 					break;
 				}
 				var itemJson = myTableJson_json[i];
-				if (itemJson.isUpload == "1" || 1==1) {
+				if (itemJson.isUpload == "1") {
 					var tempi_i = i + 1;//table的序号，不作实际用途
 					dispaly_str = dispaly_str + "<tr>" +
 						"<td style='display: none;'>" + itemJson.ID + "</td>" +
 						"<td>" + tempi_i + "</td>" +
-						"<td><input type=\"checkbox\" checked=\"ture\"/></td>" +
+						"<td style=\"display: none;\"><input type=\"checkbox\" checked=\"ture\"/></td>" +
 						"<td>" + itemJson.name + "</td>" +
-						"<td>" + itemJson.idType + "</td>" +
+						"<td>" + itemJson.idNum + "</td>" +
 						"<td>阴性</td>" +
-						"<td><input type=\"text\" value=\"" + myTool_getThisTime() + "\"/>" +
+						"<td>" + itemJson.testTime + "</td>" +
 						"<td>" + itemJson.samplingTime + "</td>";
 				}
 				dispaly_str = dispaly_str + "</tr>";
@@ -116,14 +116,14 @@
 		function setPagePrevious() {//上一页
 			if(myThisPage_i > 1){
 				myThisPage_i--;
+				setTableList();
 			}
-			setTableList();
 		}
 		function setPageNext() {//下一页
 			if(myThisPage_i * myTableMaxItem_i < myTableJson_json.length){
 				myThisPage_i++;
+				setTableList();
 			}
-			setTableList();
 		}
 		function setMaxPage() {
 			myTableMaxItem_i = $("#maxPage").val();
@@ -138,7 +138,7 @@
 				// 导出的Excel文档的名称
 				name: "Excel Document Name",
 				// Excel文件的名称
-				filename: "test",
+				filename: "核酸"+myTool_getThisTime(),
 				//文件后缀名
 				fileext: ".xls",
 				//是否排除导出图片
@@ -215,7 +215,7 @@
 			<tr style="background-color: rgb(228, 220, 108);height: 44px;">
 				<td style="display: none;">SqlID</td>
 				<td>序号</td>
-				<td>是否上报</td>
+				<td style="display: none;">是否上报</td>
 				<td>姓名</td>
 				<td>身份证</td>
 				<td>检测结果</td>
