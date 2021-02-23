@@ -10,15 +10,45 @@ window.console = window.console || (function () {
 function myTool_getThisTime() {
     var myDateTime = new Date();
     var myMonth = myDateTime.getMonth() + 1;
-    var tempSec = myDateTime.getSeconds()
+    var tempHou = myDateTime.getHours();
+    var tempMinu = myDateTime.getMinutes();
+    var tempSec = myDateTime.getSeconds();
+    if(tempHou < 10){
+        tempHou = "0" + tempHou;
+    }
+    if(tempMinu < 10){
+        tempMinu = "0" + tempMinu;
+    }
     if(tempSec < 10){
         tempSec = "0" + tempSec;
     }
     var thisTime_str = myDateTime.getFullYear() + "/" + 
     myMonth + "/" + 
     myDateTime.getDate() + " " + 
+    tempHou + ":" + 
+    tempMinu + ":" + 
+    tempSec;
+    return thisTime_str;
+}
+//格式化时间
+
+function myTool_forTime(d) {
+    var myDateTime = new Date(d);
+    alert(myDateTime);
+    var myMonth = myDateTime.getMonth() + 1;
+    var tempMinu = myDateTime.getMinutes().toString();//如果时分秒少于2位数需要在前面补零
+    var tempSec = myDateTime.getSeconds().toString();
+    if(tempSec.length < 2){
+        tempSec = "0" + tempSec;
+    }
+    if(tempMinu.length < 2){
+        tempMinu = "0" + tempMinu;
+    }
+    var thisTime_str = myDateTime.getFullYear() + "/" + 
+    myMonth + "/" + 
+    myDateTime.getDate() + " " + 
     myDateTime.getHours() + ":" + 
-    myDateTime.getMinutes() + ":" + 
+    tempMinu + ":" + 
     tempSec;
     return thisTime_str;
 }
