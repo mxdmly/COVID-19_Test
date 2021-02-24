@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<title>检测结果上报表</title>
@@ -45,7 +45,7 @@
 	<script>
 		var myCheck_arr = new Array();//检测是否有篡改table
 		var myTableJson_json = "";//获取SQL传回数据的JSON
-		var myTableMaxItem_i = 10, myThisPage_i = 1;//表格的最大行数，现在的页数
+		var myTableMaxItem_i = 20, myThisPage_i = 1;//表格的最大行数，现在的页数
 		$(document).ready(function () {//网页载入后立即执行的函数
 			//$("#myListTable").on(displaySpecialEffects());
 			getList();
@@ -276,7 +276,7 @@
 			<input type="text" value="1" id="page" class="left2" style="width:17px;height: 17px;"/>
 			<input type="button" value="后一页" id="turnRight" onclick="setPageNext()" class="left2"/>
 			<label class="left2" style="margin-top: 1px;">&emsp;&emsp;每页显示</label>
-			<input type="text" value="10" id="maxPage" class="left2" style="width:17px;height: 17px;border:none;border-bottom:black solid 1px;
+			<input type="text" value="20" id="maxPage" class="left2" style="width:17px;height: 17px;border:none;border-bottom:black solid 1px;
 			background:transparent;" />
 			<label class="left2" style="margin-top: 1px;">条数据</label>
 			<input type="button" value="确认" id="setMaxPage" onclick="setMaxPage()" class="left2"/>
