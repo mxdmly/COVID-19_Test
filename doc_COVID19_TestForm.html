@@ -110,7 +110,7 @@
                         url:'doc_COVID19_TestForm_return.jsp',
                         data:$("#peopleInfo").serializeArray(),
                         success:function(){
-                            //alert("保存成功！");
+                            alert("保存成功！");
                             myPrint();
                         }
                     })
@@ -607,11 +607,12 @@
             </form>
             <div class="myPrintBody" style="text-align: left;float: left;display: none;">
                 检验指引：
-                <br>1、门诊请携带本表格前往本院1楼采咽室
+                <br>1、门诊请携带本表格前往1楼采咽室
                 <br>2、住院请等待护士处理
             </div>
         </div>
         <div style="text-align: right;margin: auto;width: 910px;padding-top:10px;">
+            <input type="button" name="myPrint" id="myPrint" value="重新打印" class="myUpdate" style="float: left;" onclick="myPrint()" >
             <input type="button" name="update" id="update" value="提交并打印" class="myUpdate" >
             <input type="button" name="reset" id="reset" value="重置" class="myUpdate" onclick="myReset()">
         </div>

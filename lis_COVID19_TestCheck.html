@@ -44,7 +44,7 @@
 	<script>
 		var myCheck_arr = new Array();//检测是否有篡改table
 		var myTableJson_json = "";//获取SQL传回数据的JSON
-		var myTableMaxItem_i = 10, myThisPage_i = 1;//表格的最大行数，现在的页数
+		var myTableMaxItem_i = 20, myThisPage_i = 1;//表格的最大行数，现在的页数
 		$(document).ready(function () {//网页载入后立即执行的函数
 			//$("#myListTable").on(displaySpecialEffects());
 			getList();
@@ -91,7 +91,7 @@
 					dispaly_str = dispaly_str + "<tr>" +
 						"<td style='display: none;'>" + itemJson.ID + "</td>" +
 						"<td>" + tempi_i + "</td>" +
-						"<td><input type=\"checkbox\" checked=\"ture\"/></td>" +
+						"<td><input type=\"checkbox\" /></td>" +
 						"<td>" + itemJson.name + "</td>" +
 						"<td>" + itemJson.idNum + "</td>" +
 						"<td>阴性</td>" +
@@ -103,14 +103,16 @@
 			}
 			if(jsonLen_i <= 0){
 				dispaly_str = "<tr><td>无数据</td></tr>";
-				$("#allCheck").prop("checked", false);
+				//$("#allCheck").prop("checked", false);
 			}else{
-				$("#allCheck").prop("checked", true);
+				//$("#allCheck").prop("checked", true);
 			}
 			$("#myListTable").append(dispaly_str);
 			$("#page").val(myThisPage_i);
 			$("#myListTable tr:not(:first)").off();//移除事件重新绑定，不然会重复绑定越来越卡
 			displaySpecialEffects();
+			//根据检验科要求不要全选
+			$("#allCheck").prop("checked", false);
 		}
 		function setPagePrevious() {//上一页
 			if(myThisPage_i > 1){
@@ -184,7 +186,7 @@
 				$(this).css("background-color","white");
 			});
 			tr_se.click(function (e) {
-				console.log($(e.target).html());//记得删除
+				//console.log($(e.target).html());//记得删除
 				var myCheck = $(this).find("td:eq(2) input:eq(0)");
 				if($(e.target).html() != ""){//如果点击框框就会返回空白，解决点击框框不勾选或乱勾选的问题
 					myCheck.prop("checked", ! myCheck.prop("checked"));
@@ -233,7 +235,7 @@
 			<tr style="background-color: rgb(129, 230, 191);">
 				<td style="display: none;">SqlID</td>
 				<td>序号</td>
-				<td>是否上报<br><label for="allCheck" style="font-size: 10px;">（全选<input type="checkbox" id="allCheck" onclick="myAllCheck()" checked="ture" style="width: 10px;vertical-align: -10%;" />）</label></td>
+				<td>是否上报<br><label for="allCheck" style="font-size: 10px;">（全选<input type="checkbox" id="allCheck" onclick="myAllCheck()" style="width: 10px;vertical-align: -10%;" />）</label></td>
 				<td>姓名</td>
 				<td>身份证</td>
 				<td>检测结果</td>
@@ -246,7 +248,7 @@
 			<input type="text" value="1" id="page" class="left2" style="width:17px;height: 17px;"/>
 			<input type="button" value="后一页" id="turnRight" onclick="setPageNext()" class="left2"/>
 			<label class="left2" style="margin-top: 1px;">&emsp;&emsp;每页显示</label>
-			<input type="text" value="10" id="maxPage" class="left2" style="width:17px;height: 17px;border:none;border-bottom:black solid 1px;
+			<input type="text" value="20" id="maxPage" class="left2" style="width:17px;height: 17px;border:none;border-bottom:black solid 1px;
 			background:transparent;" />
 			<label class="left2" style="margin-top: 1px;">条数据</label>
 			<input type="button" value="确认" id="setMaxPage" onclick="setMaxPage()" class="left2"/>
