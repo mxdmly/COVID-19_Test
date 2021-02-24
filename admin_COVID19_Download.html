@@ -70,8 +70,8 @@
 						console.log(e);
 						sendTips("没有数据");
 					}
-                }
-            })
+				}
+			})
 		}
 		function setTableList() {//设置table显示的内容
 			$("#myListTable tr:not(:first)").remove();//删除第一行以外的数据
@@ -87,18 +87,43 @@
 					break;
 				}
 				var itemJson = myTableJson_json[i];
-				if (itemJson.isUpload == "1") {
+				if (itemJson.isUpload == "1") {//这句不需要的，后期要删除
 					var tempi_i = i + 1;//table的序号，不作实际用途
+					console.assert(itemJson.ID);
 					dispaly_str = dispaly_str + "<tr>" +
 						"<td style='display: none;'>" + itemJson.ID + "</td>" +
-						"<td>" + tempi_i + "</td>" +
-						"<td style=\"display: none;\"><input type=\"checkbox\" checked=\"ture\"/></td>" +
-						"<td>" + itemJson.name + "</td>" +
-						"<td>" + "'" + itemJson.idNum + "</td>" +
-						"<td>阴性</td>" +
-						"<td>" + itemJson.testTime + "</td>" +
-						"<td>" + itemJson.samplingTime + "</td>";
+						"<td >" + tempi_i + "</td>" +
+						"<td >" + itemJson.name + "</td>" +
+						"<td style='display: none;'>" + itemJson.age + "</td>" +
+						"<td style='display: none;'>" + itemJson.phoneNum + "</td>" +
+						"<td style='display: none;'>" + itemJson.sex + "</td>" +
+						"<td style='display: none;'>" + itemJson.countryAndRegion + "</td>" +
+						"<td style='display: none;'>" + itemJson.sheng + "</td>" +
+						"<td style='display: none;'>" + itemJson.city + "</td>" +
+						"<td style='display: none;'>" + itemJson.idType + "</td>" +
+						"<td >" + itemJson.idNum + "</td>" +
+						"<td style='display: none;'>" + itemJson.peopleSource + "</td>" +
+						"<td style='display: none;'>" + itemJson.peopleIdentity + "</td>" +
+						"<td style='display: none;'>" + itemJson.immigrationWithinFTDays + "</td>" +
+						"<td style='display: none;'>" + itemJson.insuranceSheng + "</td>" +
+						"<td style='display: none;'>" + itemJson.insuranceCity + "</td>" +
+						"<td style='display: none;'>" + itemJson.insuranceType + "</td>" +
+						"<td style='display: none;'>" + itemJson.SamplingAgency + "</td>" +
+						"<td >" + itemJson.samplingTime + "</td>" +
+						"<td style='display: none;'>" + itemJson.specimenType + "</td>" +
+						"<td style='display: none;'>" + itemJson.testItems + "</td>" +
+						"<td style='display: none;'>" + itemJson.settlementType + "</td>" +
+						"<td style='display: none;'>" + itemJson.samplingLocation + "</td>" +
+						"<td style='display: none;'>" + itemJson.unit + "</td>" +
+						"<td style='display: none;'>" + itemJson.specimenBarCode + "</td>" +
+						"<td >" + itemJson.testTime + "</td>" +
+						"<td >" + itemJson.testResult + "</td>" +
+						"<td style='display: none;'>" + itemJson.note1 + "</td>" +
+						"<td style='display: none;'>" + itemJson.note2 + "</td>" +
+						"<td style='display: none;'>" + itemJson.myHospitalIdCard + "</td>" +
+						"<td style='display: none;'>" + itemJson.isUpload + "</td>" ;
 				}
+				console.assert(itemJson.samplingTime);
 				dispaly_str = dispaly_str + "</tr>";
 				myCheck_arr.push(String(itemJson.ID));
 			}
@@ -213,14 +238,37 @@
 		</div>
 		<table id="myListTable" >
 			<tr style="background-color: rgb(228, 220, 108);height: 44px;">
-				<td style="display: none;">SqlID</td>
-				<td>序号</td>
-				<td style="display: none;">是否上报</td>
-				<td>姓名</td>
-				<td>身份证</td>
-				<td>检测结果</td>
-				<td>检测时间</td>
-				<td>采样时间</td>
+				<td style="display: none;">ID</td>
+				<td >序号</td>
+				<td >姓名</td>
+				<td style="display: none;">age</td>
+				<td style="display: none;">phoneNum</td>
+				<td style="display: none;">sex</td>
+				<td style="display: none;">countryAndRegion</td>
+				<td style="display: none;">sheng</td>
+				<td style="display: none;">city</td>
+				<td style="display: none;">idType</td>
+				<td >身份证</td>
+				<td style="display: none;">peopleSource</td>
+				<td style="display: none;">peopleIdentity</td>
+				<td style="display: none;">immigrationWithinFTDays</td>
+				<td style="display: none;">insuranceSheng</td>
+				<td style="display: none;">insuranceCity</td>
+				<td style="display: none;">insuranceType</td>
+				<td style="display: none;">SamplingAgency</td>
+				<td >采样时间</td>
+				<td style="display: none;">specimenType</td>
+				<td style="display: none;">testItems</td>
+				<td style="display: none;">settlementType</td>
+				<td style="display: none;">samplingLocation</td>
+				<td style="display: none;">unit</td>
+				<td style="display: none;">specimenBarCode</td>
+				<td >检测时间</td>
+				<td >检测结果</td>
+				<td style="display: none;">note1</td>
+				<td style="display: none;">note2</td>
+				<td style="display: none;">myHospitalIdCard</td>
+				<td style="display: none;">isUpload</td>
 			</tr>
 		</table>
 		<div style="margin-top: 10px;">
