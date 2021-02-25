@@ -184,7 +184,6 @@
 		function delTableItem(delId_i, delItem_i) {
 			myTableJson_json.splice((myThisPage_i-1) * myTableMaxItem_i + delItem_i, 1);
 			setTableList();
-			return;
 			var tempDelet_str = "";
 			tempDelet_str = "[{\"ID\":\""+ delId_i +"\"}]"
 			$.ajax({
