@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-		<meta charset="utf-8">
+		<meta charset="utf-8" http-equiv="x-ua-compatible" content="ie=9">
 		<title>新冠病毒核酸检测</title>
         <style>
             .myClass{
-                text-align:right;
+                text-align: right;
                 margin: auto;
                 width: 910px;
                 border:0px solid rgb(57, 14, 214);
-                padding:10px;
+                padding-top:10px;
             }
             font{
                 color: rgb(255, 255, 255);
@@ -21,6 +21,141 @@
                 width: 110px;
             }
             input{font-size:15px; width:146px;height:18px;margin-top: 4px;}
+            input.selectStyle{
+                width: 14px;
+                vertical-align: -20%;
+            }
+            input.myUpdate{
+                margin: auto;
+                height: 50px;
+                margin-top: 10px;
+            }
+            .myDiv_TitleTop{
+                text-align:left;
+                font-weight: normal;
+                font-size: 30px;
+                border:0px solid rgb(57, 14, 214);
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+            .myDiv_TitleLeft{
+                text-align:left;
+                font-size: 15px;
+                font-weight: normal;
+                border:0px solid rgb(57, 14, 214);
+            }
+            .myDiv_BarCode{
+                text-align:center;
+                font-size: 15px;
+                font-weight: normal;
+                padding: 30px;
+                color:rgb(92, 92, 92);
+                border:2px solid rgb(128, 128, 128);
+            }
+        </style>
+        <script src="js/jquery.js"></script>
+        <script src="js/myTool.js"></script>
+        <script src="js/jquery.printarea.js"></script>
+        <script>
+            $(document).ready(function () { //页面加载完后调用
+                displayDate();
+            })
+            function displayDate() { //显示采样时间
+                var myDateTime = new Date();
+                var myMonth = myDateTime.getMonth() + 1;
+                document.getElementById("samplingTime").value = myTool_getThisTime();
+            }
+            function setIdData() { //填写完身份证后自动识别
+                var buff_IDcard = new String(document.getElementById("idNum").value);
+                if (buff_IDcard.length == 18) {
+                    //判断性别
+                    var buffSex = new Number(buff_IDcard.slice(-2,-1));
+                    if(buffSex % 2 == 0){
+                        document.getElementById("female").checked = true;
+                    }else{
+                        document.getElementById("male").checked = true;
+                    }
+                    //判断年龄
+                    var buffTime = new Date();
+                    var buffThisTime = new Date();
+                    buffTime.setFullYear(buff_IDcard.slice(6,10),buff_IDcard.slice(10,12),buff_IDcard.slice(12,14));
+                    buffTime = buffThisTime.getTime() - buffTime.getTime();
+                    buffThisTime.setTime(buffTime);
+                    document.getElementById("_age").value = buffThisTime.getFullYear() - 1970;
+                } else {
+                }
+            }
+            function myPrint() { //打印
+                //window.document.body.innerHTML = $(this);
+                //window.print();
+                $(".myPrintBody").show();
+                $(".myClass").printArea();
+                $(".myPrintBody").hide();
+            }
+            function myReset() { //重置按钮
+                displayDate();
+            }
+            function mySubmitVerification() { //表单检查
+                var ifSend_b = true;
+                var myHospitalIdCard_str = $("#myHospitalIdCard").val();//门诊卡
+                var myName_str = $("#myName").val();//姓名
+                var myPhoneNum_str = $("#myPhoneNum").val();//手机
+                var idNum_str = $("#idNum").val();//身份证
+                var mySex_str = $("input[name='sex']:checked").val();//性别
+                var keyList_list = ["门诊卡","姓名","手机","身份证","性别"];
+                var valueList_list = [myHospitalIdCard_str,myName_str,myPhoneNum_str,idNum_str,mySex_str];
+                console.log(myHospitalIdCard_str + ", "+ myName_str + ", "+myPhoneNum_str + ", "+idNum_str + ","+mySex_str);
+                for (var i = 0; i < valueList_list.length; i++) {
+                    if(valueList_list[i] == "" | typeof(valueList_list[i]) == "undefined"){
+                        alert("请填写" + keyList_list[i]);
+                        ifSend_b = false;
+                        break;
+                    }
+                    
+                }
+                return ifSend_b;
+            }
+            function update() { //表单提交给数据库
+                if(mySubmitVerification()){
+                    $.ajax({
+                        type:'post',
+                        dataType:'text',
+                        url:'doc_COVID19_TestForm_return.jsp',
+                        data:$("#peopleInfo").serializeArray(),
+                        success:function(){
+                            alert("保存成功！现在开始打印...");
+                            myPrint();
+                        }
+                    });
+                }
+            }
+        </script>
+    </head>
+    <body onload="displayDate()">
+        <div id="myClass" class="myClass">
+        <style media="print">
+            .myClass{
+                text-align: right;
+                margin: auto;
+                width: 910px;
+                border:0px solid rgb(57, 14, 214);
+                padding-top:10px;
+            }
+            font{
+                color: rgb(255, 255, 255);
+            }
+            table{text-align:left; font-size:15px;margin:auto;width:910px;}
+            th{text-align: left;}
+            select{font-size:15px; width:150px;height:24px;margin-top: 4px;}
+            select.mySelect_Little{
+                width: 110px;
+            }
+            input{
+                font-size:15px; 
+                width:146px;
+                height:18px;
+                margin-top: 4px;
+            }
             input.selectStyle{
                 width: 14px;
                 vertical-align: -20%;
@@ -53,73 +188,7 @@
                 border:2px solid rgb(128, 128, 128);
             }
         </style>
-        <script src="js/jquery.js"></script>
-        <script>
-            $(document).ready(function () { //页面加载完后调用
-                displayDate();
-            })
-            function displayDate() { //显示采样时间
-                var myDateTime = new Date();
-                var myMonth = myDateTime.getMonth() + 1;
-                document.getElementById("samplingTime").value = 
-                myDateTime.getFullYear() + "/" + 
-                myMonth + "/" + 
-                myDateTime.getDate() + " " + 
-                myDateTime.getHours() + ":" + 
-                myDateTime.getMinutes() + ":" + 
-                myDateTime.getSeconds();
-                //console.log(myDateTime);
-            }
-            function setIdData() { //填写完身份证后自动识别
-                var buff_IDcard = new String(document.getElementById("idNum").value);
-                if (buff_IDcard.length == 18) {
-                    //判断性别
-                    var buffSex = new Number(buff_IDcard.slice(-2,-1));
-                    if(buffSex % 2 == 0){
-                        document.getElementById("female").checked = true;
-                    }else{
-                        document.getElementById("male").checked = true;
-                    }
-                    //判断年龄
-                    var buffTime = new Date();
-                    var buffThisTime = new Date();
-                    buffTime.setFullYear(buff_IDcard.slice(6,10),buff_IDcard.slice(10,12),buff_IDcard.slice(12,14));
-                    buffTime = buffThisTime.getTime() - buffTime.getTime();
-                    buffThisTime.setTime(buffTime);
-                    document.getElementById("_age").value = buffThisTime.getFullYear() - 1970;
-                } else {
-                }
-            }
-            function mySubmitVerification() { //表单检查
-                var ifSend_b = true;
-                if (true) {
-                } else {
-                }
-                return ifSend_b;
-            }
-            function myPrint() { //打印
-                window.print();
-            }
-            function myReset() { //重置按钮
-                displayDate();
-            }
-            $(function () { //表单提交给数据库
-                $("#update").click(function () {
-                    $.ajax({
-                        type:'post',
-                        dataType:'text',
-                        url:'doc_COVID19_TestForm_return.jsp',
-                        data:$("#peopleInfo").serializeArray(),
-                        success:function(){
-                            //alert("保存成功！");
-                        }
-                    })
-                })
-            })
-        </script>
-    </head>
-    <body onload="displayDate()">
-        <div id="myClass" class="myClass">
+            <img class="myPrintBody" src="/img/logo.png" width="175" height="50" style="float: left;display: none;"><br>
             <table >
                 <tr>
                     <th>
@@ -147,9 +216,9 @@
                         <th style="border-bottom:0px;">
                             <h3>基本信息(<font style="color: rgb(255, 0, 0);">必填</font>)</h3>
                             门诊卡号：<input id="myHospitalIdCard" name="myHospitalIdCard" type="text" maxlength="12"/>
-                            <font style="color: black;">*暂时不支持刷卡自动填写，以后改进</font>
+                            <font style="color: black;font-weight: normal">*暂时不支持刷卡自动填写，以后改进</font>
                             <br/>
-                            &emsp;<font>一</font>姓名：<input id="myName" name="myName" type="text" maxlength="16" />
+                            <font>一一</font>姓名：<input id="myName" name="myName" type="text" maxlength="16" />
                             证件类型：<select id="idType" name="idType" style="width: 300px;" >
                                 <option value="居民身份证">居民身份证</option>
                                 <option value="护照">护照</option>
@@ -542,15 +611,23 @@
                             </select>
                         </th>
                         <th style="border-top:0px;">
-                            采样机构：<input name="_SamplingAgency" id="_SamplingAgency" type="text" maxlength="100"  value="端州医院"/>
+                            采样机构：<input name="_SamplingAgency" id="_SamplingAgency" type="text" maxlength="100" />
                             <br/>
-                            采样地点：<input name="_samplingLocation" id="_samplingLocation" type="text" maxlength="100" value="城北路69号"/>
+                            采样地点：<input name="_samplingLocation" id="_samplingLocation" type="text" maxlength="100" />
                         </th>
                     </tr>
                 </table>
-                <input type="button" name="update" id="update" value="提交并打印" class="myUpdate" >
-                <input type="button" name="reset" id="reset" value="重置" class="myUpdate" onclick="myReset()">
             </form>
+            <div class="myPrintBody" style="text-align: left;float: left;display: none;">
+                检验指引：
+                <br>1、门诊请携带本表格前往1楼采咽室
+                <br>2、住院请等待护士处理
+            </div>
+        </div>
+        <div style="text-align: right;margin: auto;width: 910px;padding-top:10px;">
+            <input type="button" name="myPrint" id="myPrint" value="重新打印" class="myUpdate" style="float: left;" onclick="myPrint()" >
+            <input type="button" name="reset" id="reset" value="重置" class="myUpdate" style="float: right;" onclick="myReset()">
+            <input type="button" name="update" id="update" value="提交并打印" class="myUpdate" style="float: right; margin-right: 10px;" onclick="update()" >
         </div>
     </body>
 </html>
