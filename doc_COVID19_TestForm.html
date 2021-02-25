@@ -12,7 +12,7 @@
                 padding-top:10px;
             }
             font{
-                color: rgb(255, 255, 255);
+                color: white;
             }
             table{text-align:left; font-size:15px;margin:auto;width:910px;}
             th{text-align: left;}
@@ -93,7 +93,10 @@
                 $(".myPrintBody").hide();
             }
             function myReset() { //重置按钮
-                displayDate();
+                $("#myHospitalIdCard").val("");
+                $("#myName").val("");
+                $("#myPhoneNum").val("");
+                $("#idNum").val("");
             }
             function mySubmitVerification() { //表单检查
                 var ifSend_b = true;
@@ -123,7 +126,7 @@
                         url:'doc_COVID19_TestForm_return.jsp',
                         data:$("#peopleInfo").serializeArray(),
                         success:function(){
-                            alert("保存成功！现在开始打印...");
+                            alert("保存成功，点\"确定\"开启打印机。");
                             myPrint();
                         }
                     });
@@ -142,7 +145,7 @@
                 padding-top:10px;
             }
             font{
-                color: rgb(255, 255, 255);
+                color: white;
             }
             table{text-align:left; font-size:15px;margin:auto;width:910px;}
             th{text-align: left;}
@@ -150,12 +153,7 @@
             select.mySelect_Little{
                 width: 110px;
             }
-            input{
-                font-size:15px; 
-                width:146px;
-                height:18px;
-                margin-top: 4px;
-            }
+            input{font-size:15px; width:146px;height:18px;margin-top: 4px;}
             input.selectStyle{
                 width: 14px;
                 vertical-align: -20%;
@@ -163,7 +161,7 @@
             input.myUpdate{
                 margin: auto;
                 height: 50px;
-                margin-top: 20px;
+                margin-top: 10px;
             }
             .myDiv_TitleTop{
                 text-align:left;

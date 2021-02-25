@@ -16,3 +16,6 @@ https://cdn.staticfile.org/react/0.14.8/react.js
 
 2021年2月9日
 改用tomcat，用jsp响应用户表单请求
+
+2021年2月25日
+正式版v1已上线
