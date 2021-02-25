@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-		<meta charset="utf-8">
+		<meta charset="utf-8" http-equiv="x-ua-compatible" content="ie=9">
 		<title>新冠病毒核酸检测</title>
         <style>
             .myClass{
@@ -85,13 +85,6 @@
                 } else {
                 }
             }
-            function mySubmitVerification() { //表单检查
-                var ifSend_b = true;
-                if (true) {
-                } else {
-                }
-                return ifSend_b;
-            }
             function myPrint() { //打印
                 //window.document.body.innerHTML = $(this);
                 //window.print();
@@ -102,20 +95,40 @@
             function myReset() { //重置按钮
                 displayDate();
             }
-            $(function () { //表单提交给数据库
-                $("#update").click(function () {
+            function mySubmitVerification() { //表单检查
+                var ifSend_b = true;
+                var myHospitalIdCard_str = $("#myHospitalIdCard").val();//门诊卡
+                var myName_str = $("#myName").val();//姓名
+                var myPhoneNum_str = $("#myPhoneNum").val();//手机
+                var idNum_str = $("#idNum").val();//身份证
+                var mySex_str = $("input[name='sex']:checked").val();//性别
+                var keyList_list = ["门诊卡","姓名","手机","身份证","性别"];
+                var valueList_list = [myHospitalIdCard_str,myName_str,myPhoneNum_str,idNum_str,mySex_str];
+                console.log(myHospitalIdCard_str + ", "+ myName_str + ", "+myPhoneNum_str + ", "+idNum_str + ","+mySex_str);
+                for (var i = 0; i < valueList_list.length; i++) {
+                    if(valueList_list[i] == "" | typeof(valueList_list[i]) == "undefined"){
+                        alert("请填写" + keyList_list[i]);
+                        ifSend_b = false;
+                        break;
+                    }
+                    
+                }
+                return ifSend_b;
+            }
+            function update() { //表单提交给数据库
+                if(mySubmitVerification()){
                     $.ajax({
                         type:'post',
                         dataType:'text',
                         url:'doc_COVID19_TestForm_return.jsp',
                         data:$("#peopleInfo").serializeArray(),
                         success:function(){
-                            alert("保存成功！");
+                            alert("保存成功！现在开始打印...");
                             myPrint();
                         }
-                    })
-                })
-            })
+                    });
+                }
+            }
         </script>
     </head>
     <body onload="displayDate()">
@@ -613,8 +626,8 @@
         </div>
         <div style="text-align: right;margin: auto;width: 910px;padding-top:10px;">
             <input type="button" name="myPrint" id="myPrint" value="重新打印" class="myUpdate" style="float: left;" onclick="myPrint()" >
-            <input type="button" name="update" id="update" value="提交并打印" class="myUpdate" >
-            <input type="button" name="reset" id="reset" value="重置" class="myUpdate" onclick="myReset()">
+            <input type="button" name="reset" id="reset" value="重置" class="myUpdate" style="float: right;" onclick="myReset()">
+            <input type="button" name="update" id="update" value="提交并打印" class="myUpdate" style="float: right; margin-right: 10px;" onclick="update()" >
         </div>
     </body>
 </html>

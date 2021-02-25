@@ -52,12 +52,12 @@
 		});
 		function getList() { //获取数据库列表，也是刷新按钮
 			$("#myListTable tr:not(:first)").remove();//删除第一行以外的数据
-            $.ajax({
-                //type:'post',
-                //dataType:'text',
-                url:'admin_COVID19_Download.jsp',
-                //data:$("#peopleInfo").serializeArray(),
-                success:function(result){//jsp会返回一个json字符串
+			$.ajax({
+				//type:'post',
+				dataType:'text',
+				url:'admin_COVID19_Download.jsp',
+				//data:$("#peopleInfo").serializeArray(),
+				success:function(result){//jsp会返回一个json字符串
 					//console.log(result);
 					try {//如果不是json或为空就会报错
 						myTableJson_json = JSON.parse(result);
@@ -71,7 +71,7 @@
 						sendTips("没有数据");
 					}
 				}
-			})
+			});
 		}
 		function setTableList() {//设置table显示的内容
 			$("#myListTable tr:not(:first)").remove();//删除第一行以外的数据
@@ -154,8 +154,7 @@
 			myTableMaxItem_i = $("#maxPage").val();
 			setTableList();
 		}
-		//获取复选框的值上传
-		//上传的时候需要有SQL server的ID、是否勾选、结果、时间，用json保存和传输
+		//下载，把要下载后的upload改为2，表示已下载不再显示出来
 		function downloadListForExcel() {
 			$("#myListTable").table2excel({
 				// 不被导出的表格行的CSS class类
@@ -173,6 +172,39 @@
 				//是否排除导出输入框中的内容
 				exclude_inputs: false
 			});
+			var tempUpload_str = "";
+			var deleteJsonItem_i = (myThisPage_i-1) * myTableMaxItem_i;
+			$("#myListTable tr:not(:first)").each(function () {
+				var tempIfUpload_str = 2;//更改upload标识
+				var tempId_str = $(this).find("td:eq(0)").html();//sql的ID
+				if(myCheck_arr.indexOf(tempId_str) >= 0){
+					tempUpload_str = tempUpload_str + "{" + 
+					"\"ID\":\"" + tempId_str + "\"," + 
+					"\"isUpload\":\"" + tempIfUpload_str + "\"" + 
+					"},";
+					myTableJson_json.splice(deleteJsonItem_i, 1);
+					deleteJsonItem_i--;
+				}
+				deleteJsonItem_i++;
+			})
+			if(tempUpload_str.length > 2){//判断是否有有效的数据
+				tempUpload_str = "[" + tempUpload_str.substring(0, tempUpload_str.length - 1) + "]";
+				$.ajax({
+					type:'post',
+					dataType:'text',
+					url:'admin_COVID19_DowDelet.jsp',
+					data:{
+						"data":tempUpload_str
+					},
+					success:function(){
+						sendTips("更新成功!");
+					}
+				});
+			}else{
+				sendTips("无数据!");
+			}
+			console.log(tempUpload_str);
+			setTableList();
 		}
 		function sendTips(params) {//显示提示的动画
 			$("#tips").stop();
