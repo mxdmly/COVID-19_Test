@@ -68,29 +68,79 @@
             out.print("发现SQL注入");
         }else{
             out.print("通过");
+            sql_str = "INSERT INTO _COVID19test(myHospitalIdCard,name,idType,phoneNum," + 
+                "idNum,sex,countryAndRegion,insuranceSheng,settlementType,peopleSource," + 
+                "peopleIdentity,immigrationWithinFTDays,samplingTime,specimenType,testItems," + 
+                "age,sheng,city,insuranceType,insuranceCity,unit,SamplingAgency," + 
+                "samplingLocation) VALUES(" + 
+                sqlNonNullFormat(myHospitalIdCard_str) + sqlNonNullFormat(myName_str) + 
+                sqlNonNullFormat(idType_str) + sqlNonNullFormat(myPhoneNum_str) + 
+                sqlNonNullFormat(idNum_str) + sqlNonNullFormat(sex_str) + 
+                sqlNonNullFormat(countryAndRegion_str) + sqlNonNullFormat(insuranceSheng_str) + 
+                sqlNonNullFormat(settlementType_str) + sqlNonNullFormat(peopleSource_str) + 
+                sqlNonNullFormat(peopleIdentity_str) + sqlNonNullFormat(immigrationWithinFTDays_str) + 
+                sqlNonNullFormat(samplingTime_str) + sqlNonNullFormat(specimenType_str) + 
+                sqlNonNullFormat(testItems_str) + sqlNonNullFormat(_age_str) + 
+                sqlNonNullFormat(_sheng_str) + sqlNonNullFormat(_city_str) + 
+                sqlNonNullFormat(_insuranceType_str) + sqlNonNullFormat(_insuranceCity_str) + 
+                sqlNonNullFormat(_unit_str) + sqlNonNullFormat(_SamplingAgency_str) + 
+                sqlNonNullFormat(_samplingLocation_str);
+            sql_str = sql_str.substring(0, sql_str.length() -1) + ")";//减去最后的逗号
+            //做重复性检查
+            String returnedData_str = "";//数据库返回的数据
+            String checkDataRepeat_str = ""; //需要插入的数据
+                checkDataRepeat_str = 
+                sqlNonNullFormat(myHospitalIdCard_str) + sqlNonNullFormat(myName_str) + 
+                sqlNonNullFormat(idType_str) + sqlNonNullFormat(myPhoneNum_str) + 
+                sqlNonNullFormat(idNum_str) + sqlNonNullFormat(sex_str) + 
+                sqlNonNullFormat(countryAndRegion_str) + sqlNonNullFormat(insuranceSheng_str) + 
+                sqlNonNullFormat(settlementType_str) + sqlNonNullFormat(peopleSource_str) + 
+                sqlNonNullFormat(peopleIdentity_str) + sqlNonNullFormat(immigrationWithinFTDays_str) + 
+                sqlNonNullFormat(samplingTime_str) + sqlNonNullFormat(specimenType_str) + 
+                sqlNonNullFormat(testItems_str) + sqlNonNullFormat(_age_str) + 
+                sqlNonNullFormat(_sheng_str) + sqlNonNullFormat(_city_str) + 
+                sqlNonNullFormat(_insuranceType_str) + sqlNonNullFormat(_insuranceCity_str) + 
+                sqlNonNullFormat(_unit_str) + sqlNonNullFormat(_SamplingAgency_str) + 
+                sqlNonNullFormat(_samplingLocation_str);
             try{
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 Connection connection = DriverManager.getConnection("jdbc:sqlserver://198.8.8.7:1433;DatabaseName=nhis", "sa", "sa123!@#");
-                sql_str = "INSERT INTO _COVID19test(myHospitalIdCard,name,idType,phoneNum," + 
-                    "idNum,sex,countryAndRegion,insuranceSheng,settlementType,peopleSource," + 
-                    "peopleIdentity,immigrationWithinFTDays,samplingTime,specimenType,testItems," + 
-                    "age,sheng,city,insuranceType,insuranceCity,unit,SamplingAgency," + 
-                    "samplingLocation) VALUES(" + 
-                    sqlNonNullFormat(myHospitalIdCard_str) + sqlNonNullFormat(myName_str) + 
-                    sqlNonNullFormat(idType_str) + sqlNonNullFormat(myPhoneNum_str) + 
-                    sqlNonNullFormat(idNum_str) + sqlNonNullFormat(sex_str) + 
-                    sqlNonNullFormat(countryAndRegion_str) + sqlNonNullFormat(insuranceSheng_str) + 
-                    sqlNonNullFormat(settlementType_str) + sqlNonNullFormat(peopleSource_str) + 
-                    sqlNonNullFormat(peopleIdentity_str) + sqlNonNullFormat(immigrationWithinFTDays_str) + 
-                    sqlNonNullFormat(samplingTime_str) + sqlNonNullFormat(specimenType_str) + 
-                    sqlNonNullFormat(testItems_str) + sqlNonNullFormat(_age_str) + 
-                    sqlNonNullFormat(_sheng_str) + sqlNonNullFormat(_city_str) + 
-                    sqlNonNullFormat(_insuranceType_str) + sqlNonNullFormat(_insuranceCity_str) + 
-                    sqlNonNullFormat(_unit_str) + sqlNonNullFormat(_SamplingAgency_str) + 
-                    sqlNonNullFormat(_samplingLocation_str);
-                sql_str = sql_str.substring(0, sql_str.length() -1) + ")";//减去最后的逗号
                 Statement stmt = connection.createStatement();
-                result_i = stmt.executeUpdate(sql_str);
+
+                String checkDataRepeatSql_str = "SELECT * _COVID19test WHILE idNum = '"+ idNum_str +"'"; 
+                ResultSet rs = stmt.executeQuery(sql_str);
+                while(re.next()){
+                    returnedData_str = 
+                    rs.getString("myHospitalIdCard") + 
+                    rs.getString("name") + 
+                    rs.getString("idType") + 
+                    rs.getString("phoneNum") + 
+                    rs.getString("idNum") + 
+                    rs.getString("sex") + 
+                    rs.getString("countryAndRegion") + 
+                    rs.getString("insuranceSheng") + 
+                    rs.getString("settlementType") + 
+                    rs.getString("peopleSource") + 
+                    rs.getString("peopleIdentity") + 
+                    rs.getString("immigrationWithinFTDays") + 
+                    rs.getString("samplingTime") + 
+                    rs.getString("specimenType") + 
+                    rs.getString("testItems") + 
+                    rs.getString("age") + 
+                    rs.getString("sheng") + 
+                    rs.getString("city") + 
+                    rs.getString("insuranceType") + 
+                    rs.getString("insuranceCity") + 
+                    rs.getString("unit") + 
+                    rs.getString("SamplingAgency") + 
+                    rs.getString("samplingLocation");
+                }
+                if(returnedData_str.equals(checkDataRepeat_str)){
+                    result_i = -2;
+                }else{
+                    result_i = stmt.executeUpdate(sql_str);
+                }
+                rs.close();
                 stmt.close();
                 connection.close();
             }catch(Exception e){
@@ -100,6 +150,6 @@
         }
         out.println(result_i + "    " + sql_str);
     %>
-    <%= sqlCheck_b %>
+    <%= result_i %>
 </body>
 </html>

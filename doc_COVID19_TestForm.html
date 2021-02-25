@@ -125,9 +125,18 @@
                         dataType:'text',
                         url:'doc_COVID19_TestForm_return.jsp',
                         data:$("#peopleInfo").serializeArray(),
-                        success:function(){
-                            alert("保存成功，点\"确定\"开启打印机。");
-                            myPrint();
+                        success:function(result){
+                            if(result >= 1){
+                                alert("保存成功，点\"确定\"开启打印机。");
+                                myPrint();
+                            }else if(result == -2){
+                                alert("请勿重复提交数据，如有需要请使用\"重新打印\"功能");
+                            }else{
+                                alert("保存失败");
+                            }
+                        },
+                        error:function () {
+                            alert("网络故障");
                         }
                     });
                 }
