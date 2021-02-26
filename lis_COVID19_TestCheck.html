@@ -104,7 +104,7 @@
 						"<td>阴性</td>" +
 						"<td><input type=\"text\" value=\"" + myTool_getThisTime() + "\"/>" +
 						"<td>" + itemJson.samplingTime + "</td>" +
-						"<td>" + "<a href='#' name='asdasdasd' onclick='ifDelet()'>删除</a>" + "</td>";
+						"<td>" + "<input type=\"button\" onclick='ifDelet()' value=\"删除\" />" + "</td>";
 				}
 				dispaly_str = dispaly_str + "</tr>";
 				myCheck_arr.push(String(itemJson.ID));
@@ -262,7 +262,7 @@
 	<div>
 		<div id="myControl" style="overflow: auto;margin-top: 10px;margin-bottom:10px;">
 			<label class="left">姓名:</label><input type="text" class="left" style="height: 15px;width: 80px;"/>
-			<label class="left">&emsp;检测时间:</label>
+			<label class="left">&emsp;检验时间:</label>
 			<input type="text" class="left" style="height: 15px;width: 80px;"/>
 			<label class="left">-</label>
 			<input type="text" class="left" style="height: 15px;width: 80px;"/>

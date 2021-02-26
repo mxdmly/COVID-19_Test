@@ -61,7 +61,7 @@
         Pattern r = Pattern.compile(CHECKSQL);
 		Matcher m = r.matcher(targerStr);
         sqlCheck_b = m.find();//使用find函数才能对任意字符串匹配
-        int result_i = -1;//sql返回值
+        int result_i = -10;//sql返回值
         String sql_str = "";//sql插入语句
 
         if(sqlCheck_b){
@@ -109,7 +109,7 @@
 
                 String checkDataRepeatSql_str = "SELECT * _COVID19test WHILE idNum = '"+ idNum_str +"'"; 
                 ResultSet rs = stmt.executeQuery(sql_str);
-                while(re.next()){
+                while(rs.next()){
                     returnedData_str = 
                     rs.getString("myHospitalIdCard") + 
                     rs.getString("name") + 

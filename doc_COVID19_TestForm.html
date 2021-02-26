@@ -89,7 +89,9 @@
                 //window.document.body.innerHTML = $(this);
                 //window.print();
                 $(".myPrintBody").show();
+                $("#myPrintHideText").css("display: none;");
                 $(".myClass").printArea();
+                $("#myPrintHideText").css("display: inline;");
                 $(".myPrintBody").hide();
             }
             function myReset() { //重置按钮
@@ -223,7 +225,7 @@
                         <th style="border-bottom:0px;">
                             <h3>基本信息(<font style="color: rgb(255, 0, 0);">必填</font>)</h3>
                             门诊卡号：<input id="myHospitalIdCard" name="myHospitalIdCard" type="text" maxlength="12"/>
-                            <font style="color: black;font-weight: normal">*暂时不支持刷卡自动填写，以后改进</font>
+                            <font id="myPrintHideText" style="color: black;font-weight: normal">*暂时不支持刷卡自动填写，以后改进</font>
                             <br/>
                             <font>一一</font>姓名：<input id="myName" name="myName" type="text" maxlength="16" />
                             证件类型：<select id="idType" name="idType" style="width: 300px;" >
