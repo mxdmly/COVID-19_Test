@@ -47,6 +47,7 @@
 		var myTableJson_json = "";//获取SQL传回数据的JSON
 		var myTableMaxItem_i = 20, myThisPage_i = 1;//表格的最大行数，现在的页数
 		var ifDelItem;//是否点击了删除按钮的判断
+		var delName;
 		myTableJson_json = JSON.parse("[{\"ID\":\"1\",\"name\":\"1\",\"idNum\":\"1\",\"samplingTime\":\"1\",\"isUpload\":\"0\"},{\"ID\":\"2\",\"name\":\"2\",\"idNum\":\"2\",\"samplingTime\":\"1\",\"isUpload\":\"0\"},{\"ID\":\"1\",\"name\":\"1\",\"idNum\":\"1\",\"samplingTime\":\"1\",\"isUpload\":\"0\"},{\"ID\":\"1\",\"name\":\"1\",\"idNum\":\"1\",\"samplingTime\":\"1\",\"isUpload\":\"0\"},{\"ID\":\"1\",\"name\":\"1\",\"idNum\":\"1\",\"samplingTime\":\"1\",\"isUpload\":\"0\"},{\"ID\":\"1\",\"name\":\"1\",\"idNum\":\"1\",\"samplingTime\":\"1\",\"isUpload\":\"0\"},{\"ID\":\"1\",\"name\":\"1\",\"idNum\":\"1\",\"samplingTime\":\"1\",\"isUpload\":\"0\"}]");
 			
 		//网页载入后立即执行的函数
@@ -208,6 +209,8 @@
 		//给每行添加选中特效，点击效果
 		function displaySpecialEffects() {
 			var tr_se = $("#myListTable tr:not(:first)");
+			//console.log(tr_se.$(this).find("td:eq(2)").val());
+			//delName = tr_se.$(this).find("td:eq(2)").val();
 			tr_se.mouseover(function () {
 				$(this).css("background-color","rgb(216,227,231)");
 			});
@@ -222,7 +225,7 @@
 				}
 				if(ifDelItem){//判断是否有点击删除以及是否确认删除，ifDelItem必须设置总是false
 					ifDelItem = false;
-					console.log($(this).find("td:eq(0)").text(), $(this).index() -1);
+					//console.log($(this).find("td:eq(0)").text(), $(this).index() -1);
 					delTableItem($(this).find("td:eq(0)").text(), $(this).index() -1);//因为是用Table算的所以要减1那是标题行，上面那个是遍历的从0开始所以不用减1
 				}
 				//跟下面的函数关联
