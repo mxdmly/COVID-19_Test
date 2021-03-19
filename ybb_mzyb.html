@@ -9,14 +9,30 @@
                 border: 10px solid rgb(194, 104, 255);
             }
         </style>
+        <script>
+            var tempUpload_str;
+            function readSqlDate(params) {
+                if(tempUpload_str.length > 2){//判断是否有有效的数据
+				tempUpload_str = "[" + tempUpload_str.substring(0, tempUpload_str.length - 1) + "]";
+				$.ajax({
+					type:'post',
+					dataType:'text',
+					url:'ybb_mzyb.jsp',
+					data:{
+						"data":tempUpload_str
+					},
+					success:function(){
+						sendTips("保存成功!");
+					}
+				});
+            }
+        </script>
     </head>
     <body>
         <div>
             <div id="myControl" style="overflow: auto;margin-top: 10px;margin-bottom:10px;">
                 <label class="left">发票号:</label><input type="text" class="left" style="height: 15px;width: 80px;"/>
                 <label class="left">&emsp;姓名:</label>
-                <input type="text" class="left" style="height: 15px;width: 80px;"/>
-                <label class="left">-</label>
                 <input type="text" class="left" style="height: 15px;width: 80px;"/>
                 <input type="button" value="查询" class="left" style="margin-top: 9px;"/>
                 <input type="button" value="刷新" onclick="getList()" class="right" />

@@ -28,7 +28,7 @@
 	try{
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		Connection connection = DriverManager.getConnection("jdbc:sqlserver://198.8.8.7:1433;DatabaseName=nhis", "sa", "sa123!@#");
-		String sql_str = "SELECT ID, name, isUpload, idNum, testResult, samplingTime FROM dbo._COVID19test WHERE isUpload = 0";
+		String sql_str = "SELECT ID, name, isUpload, idNum, testResult, samplingTime FROM dbo._COVID19test WHERE isUpload = 0 ORDER BY dbo._COVID19test.ID DESC";
 
 		Statement stmt = connection.createStatement();
 		ResultSet rs = stmt.executeQuery(sql_str);
