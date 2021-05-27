@@ -1,0 +1,35 @@
+table{
+    text-align: center;
+    margin: 0;
+    width: 100%;
+    border: 10px solid rgb(230, 228, 167);
+}
+input{
+    z-index: 2;
+    text-align: center;
+}
+.right{
+    float: right;
+    margin-left: 5px;
+    width: 100px;
+    padding: 10px;
+}
+.left{
+    float: left;
+    margin-right: 5px;
+    margin-top: 10px;
+}
+.left2{
+    float: left;
+    margin-right: 5px;
+}
+label{
+    font-size: 15px;
+}
+b{
+    font-size: 30px;
+    color: coral;
+}
+#tips{
+    z-index: 1;
+}
