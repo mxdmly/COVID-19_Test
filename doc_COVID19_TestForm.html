@@ -12,7 +12,7 @@
                 padding-top:10px;
             }
             font{
-                color: rgb(255, 255, 255);
+                color: white;
             }
             table{text-align:left; font-size:15px;margin:auto;width:910px;}
             th{text-align: left;}
@@ -89,11 +89,16 @@
                 //window.document.body.innerHTML = $(this);
                 //window.print();
                 $(".myPrintBody").show();
+                $("#myPrintHideText").css("display: none;");
                 $(".myClass").printArea();
+                $("#myPrintHideText").css("display: inline;");
                 $(".myPrintBody").hide();
             }
             function myReset() { //重置按钮
-                displayDate();
+                $("#myHospitalIdCard").val("");
+                $("#myName").val("");
+                $("#myPhoneNum").val("");
+                $("#idNum").val("");
             }
             function mySubmitVerification() { //表单检查
                 var ifSend_b = true;
@@ -104,14 +109,18 @@
                 var mySex_str = $("input[name='sex']:checked").val();//性别
                 var keyList_list = ["门诊卡","姓名","手机","身份证","性别"];
                 var valueList_list = [myHospitalIdCard_str,myName_str,myPhoneNum_str,idNum_str,mySex_str];
-                console.log(myHospitalIdCard_str + ", "+ myName_str + ", "+myPhoneNum_str + ", "+idNum_str + ","+mySex_str);
+                //console.log(myHospitalIdCard_str + ", "+ myName_str + ", "+myPhoneNum_str + ", "+idNum_str + ","+mySex_str);
+                //检查输入框的内容是否为空，或无效
                 for (var i = 0; i < valueList_list.length; i++) {
                     if(valueList_list[i] == "" | typeof(valueList_list[i]) == "undefined"){
                         alert("请填写" + keyList_list[i]);
                         ifSend_b = false;
                         break;
                     }
-                    
+                }
+                if(idNum_str.length > 15 & idNum_str.length < 18){
+                    alert("身份证输入有误，不存在16或17位的身份证");
+                        ifSend_b = false;
                 }
                 return ifSend_b;
             }
@@ -122,12 +131,52 @@
                         dataType:'text',
                         url:'doc_COVID19_TestForm_return.jsp',
                         data:$("#peopleInfo").serializeArray(),
-                        success:function(){
-                            alert("保存成功！现在开始打印...");
-                            myPrint();
+                        success:function(result){
+                            if(result >= 1){
+                                alert("保存成功，点\"确定\"开启打印机。");
+                                myPrint();
+                            }else if(result == -2){
+                                alert("请勿重复提交数据，如有需要请使用\"重新打印\"功能");
+                            }else{
+                                alert("保存失败");
+                            }
+                        },
+                        error:function () {
+                            alert("网络故障");
                         }
                     });
                 }
+            }
+            //按门诊卡号查询个人信息
+            function queryIDCard() {
+                $.ajax({
+                    type:'post',
+                    dataType:'text',
+                    url:'doc_COVID19_TestForm_queryIDCard.jsp',
+                    data:$("#peopleInfo").serializeArray(),
+                    success:function(result){//jsp会返回一个json字符串
+                        if(result != null & result != "null"){
+                            try {//如果不是json或为空就会报错
+                                var myIDCard_json = JSON.parse(result);
+                                var item_json = myIDCard_json[0];
+                                completeTable(document.getElementById("myName"), item_json.myName);
+                                completeTable(document.getElementById("myPhoneNum"), item_json.myPhoneNum);
+                                completeTable(document.getElementById("idNum"), item_json.idNum);
+                                setIdData();
+                            } catch (e) {
+                                console.log(e);
+                            }
+                        }
+                    },
+                    error:function () {
+                        //alert("网络故障");
+                    }
+                })
+            }
+            //填写表格时检查是否有内容了，避免覆盖掉填好的内容
+            function completeTable(obj, str) {
+                if(obj.value == "" | obj.value == null)
+                    obj.value = str;
             }
         </script>
     </head>
@@ -142,7 +191,7 @@
                 padding-top:10px;
             }
             font{
-                color: rgb(255, 255, 255);
+                color: white;
             }
             table{text-align:left; font-size:15px;margin:auto;width:910px;}
             th{text-align: left;}
@@ -150,12 +199,7 @@
             select.mySelect_Little{
                 width: 110px;
             }
-            input{
-                font-size:15px; 
-                width:146px;
-                height:18px;
-                margin-top: 4px;
-            }
+            input{font-size:15px; width:146px;height:18px;margin-top: 4px;}
             input.selectStyle{
                 width: 14px;
                 vertical-align: -20%;
@@ -163,7 +207,7 @@
             input.myUpdate{
                 margin: auto;
                 height: 50px;
-                margin-top: 20px;
+                margin-top: 10px;
             }
             .myDiv_TitleTop{
                 text-align:left;
@@ -215,8 +259,8 @@
                     <tr>
                         <th style="border-bottom:0px;">
                             <h3>基本信息(<font style="color: rgb(255, 0, 0);">必填</font>)</h3>
-                            门诊卡号：<input id="myHospitalIdCard" name="myHospitalIdCard" type="text" maxlength="12"/>
-                            <font style="color: black;font-weight: normal">*暂时不支持刷卡自动填写，以后改进</font>
+                            门诊卡号：<input id="myHospitalIdCard" name="myHospitalIdCard" type="text" maxlength="12" onblur="queryIDCard()"/>
+                            <font id="myPrintHideText" style="color: black;font-weight: normal">*支持刷卡自动填写，请仔细核对个人信息</font>
                             <br/>
                             <font>一一</font>姓名：<input id="myName" name="myName" type="text" maxlength="16" />
                             证件类型：<select id="idType" name="idType" style="width: 300px;" >

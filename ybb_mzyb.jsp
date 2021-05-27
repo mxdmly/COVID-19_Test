@@ -8,7 +8,7 @@
 <%! 
 	//SQL安全防护的正则表达式
 	String CHECKSQL = "\\*|\\.|;|=|%|or|and|if|end|go|exec|insert|select|delete|update|count|chr|mid|master|truncate|char|declare";
-	String id_str,  isUpload_str,  testTime_str, testResult_str;
+	String id_str;
 	String getJsonData_str;//获取由html回传的json
 %>
 <%
@@ -29,14 +29,8 @@
             JSONObject obj_json = JSONObject.parseObject(array_json.get(i).toString());
             //获取数据
             id_str = obj_json.get("ID").toString();
-            isUpload_str = obj_json.get("isUpload").toString();//上报状态
-            testTime_str =  obj_json.get("testTime").toString();//日期
-            testResult_str="阴性";
             //写sql语句
-            sql_str = sql_str + "UPDATE _COVID19test SET isUpload='" + isUpload_str + 
-            "',testResult='" + testResult_str + 
-            "',testTime='" +  testTime_str + 
-            "' WHERE ID IN(" + id_str + "); ";
+            sql_str = sql_str + "UPDATE _COVID19test SET isUpload = -1 WHERE ID IN(" + id_str + "); ";
         }
         try{
             out.println(sql_str);
@@ -49,7 +43,7 @@
             connection.close();
         }catch(Exception e){
             e.printStackTrace();
-            //out.println(e.toString());
+            out.println(e.toString());
         }
     }
 %>

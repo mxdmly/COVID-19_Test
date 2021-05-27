@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <title>门诊药比</title>
+        <link rel="stylesheet" href="css/table.css" type="text/css" />
+        <script src="js/jquery.js"></script>
+        <script src="js/myTool.js"></script>
+        <style>
+            table{
+                border: 10px solid rgb(194, 104, 255);
+            }
+        </style>
+        <script>
+            var tempUpload_str;
+            function readSqlDate(params) {
+                if(tempUpload_str.length > 2){//判断是否有有效的数据
+				tempUpload_str = "[" + tempUpload_str.substring(0, tempUpload_str.length - 1) + "]";
+                    $.ajax({
+                        type:'post',
+                        dataType:'text',
+                        url:'ybb_mzyb.jsp',
+                        data:{
+                            "data":tempUpload_str
+                        },
+                        success:function(){
+                            sendTips("保存成功!");
+                        }
+                    });
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div>
+            <div id="myControl" style="overflow: auto;margin-top: 10px;margin-bottom:10px;">
+                <label class="left">发票号:</label><input type="text" class="left" style="height: 15px;width: 80px;"/>
+                <label class="left">&emsp;姓名:</label>
+                <input type="text" class="left" style="height: 15px;width: 80px;"/>
+                <input type="button" value="查询" class="left" style="margin-top: 9px;"/>
+                <input type="button" value="刷新" onclick="getList()" class="right" />
+                <input type="button" value="结果下载" onclick="downloadListForExcel()" class="right" />
+                <b id="tips" style="opacity: 0;width: 140px;float: right;">保存成功!</b>
+            </div>
+            <table id="myListTable" >
+                <tr style="background-color: rgb(222, 173, 255);height: 44px;">
+                    <td style="display: none;">ID</td>
+                    <td >序号</td>
+                    <td >费用类型</td>
+                    <td >医生</td>
+                    <td >西药比例</td>
+                    <td >总西药费</td>
+                    <td >总费用</td>
+                    <td >医保报销费用</td>
+                    <td >姓名</td>
+                    <td >发票号</td>
+                    <td >日期</td>
+                </tr>
+            </table>
+            <div style="margin-top: 10px;">
+                <input type="button" value="前一页" id="turnLeft" onclick="setPagePrevious()" class="left2"/>
+                <input type="text" value="1" id="page" class="left2" style="width:17px;height: 17px;"/>
+                <input type="button" value="后一页" id="turnRight" onclick="setPageNext()" class="left2"/>
+                <label class="left2" style="margin-top: 1px;">&emsp;&emsp;每页显示</label>
+                <input type="text" value="20" id="maxPage" class="left2" style="width:17px;height: 17px;border:none;border-bottom:black solid 1px;
+                background:transparent;" />
+                <label class="left2" style="margin-top: 1px;">条数据</label>
+                <input type="button" value="确认" id="setMaxPage" onclick="setMaxPage()" class="left2"/>
+            </div>
+        </div>
+    </body>
+</html>

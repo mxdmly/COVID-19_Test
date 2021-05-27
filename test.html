@@ -1,16 +1,33 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <script src="/js/jquery.js"></script>
   <script src="/js/myTool.js"></script>
-<script>
-  $(document).ready(function () {
-    alert(myTool_forTime("2021-2-23 11:06:43"));
-  });
-</script>
+  <script>
+    $(document).ready(function () {
+      alert(myTool_forTime("2021-2-23 11:06:43"));
+    });
+    function getList() {
+      $.ajax({
+        type: 'post',
+        dataType: 'text',
+        url: 'test.jsp',
+        //data:$("#peopleInfo").serializeArray(),
+        success: function (result) {//jsp会返回一个json字符串
+          console.log(result);
+          try {
+          } catch (e) {
+            console.log(e);
+          }
+        }
+      });
+    }
+  </script>
 </head>
- 
-<body >
-  
+
+<body>
+  <input type="button" value="1111111111111111" id="turnLeft" onclick="getList()" />
 </body>
+
 </html>

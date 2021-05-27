@@ -44,7 +44,7 @@
             connection.close();
         }catch(Exception e){
             e.printStackTrace();
-            out.println(e.toString());
+            //out.println(e.toString());
         }
     }
 %>
